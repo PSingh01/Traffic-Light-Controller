@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
+  <block name="SARed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SAYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NAGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NARed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NAYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SAGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="TLCMode1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="TLCMode2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="TLCMode" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="ESensor" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NASensor" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="EGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SRed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NRed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="NYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="ERed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="EYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="WGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="WRed" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="WYellow" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+</blockRegMap>

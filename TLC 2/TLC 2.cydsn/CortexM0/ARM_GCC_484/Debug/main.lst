@@ -1,0 +1,2961 @@
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.main,"ax",%progbits
+  18              		.align	2
+  19              		.global	main
+  20              		.code	16
+  21              		.thumb_func
+  22              		.type	main, %function
+  23              	main:
+  24              	.LFB35:
+  25              		.file 1 ".\\main.c"
+   1:.\main.c      **** #include <project.h>
+   2:.\main.c      **** #include <stdbool.h> 
+   3:.\main.c      **** 
+   4:.\main.c      **** int main()
+   5:.\main.c      **** {
+  26              		.loc 1 5 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              		.cfi_def_cfa_offset 8
+  30              		.cfi_offset 7, -8
+  31              		.cfi_offset 14, -4
+  32 0002 82B0     		sub	sp, sp, #8
+  33              		.cfi_def_cfa_offset 16
+  34 0004 00AF     		add	r7, sp, #0
+  35              		.cfi_def_cfa_register 7
+   6:.\main.c      ****     enum states { // Declaration of states
+   7:.\main.c      ****         NSGreen,
+   8:.\main.c      ****         NSYellow,
+   9:.\main.c      ****         AllRed,
+  10:.\main.c      ****         WGreen,
+  11:.\main.c      ****         WYellow,
+  12:.\main.c      ****         EGreen,
+  13:.\main.c      ****         EYellow,
+  14:.\main.c      ****         NASAGreen,
+  15:.\main.c      ****         NASAYellow,
+  16:.\main.c      ****         SAGreen,
+  17:.\main.c      ****         SSAGreen,
+  18:.\main.c      ****         SSAYellow,
+  19:.\main.c      ****         SGreen,
+  20:.\main.c      ****     }; 
+  21:.\main.c      ****   
+  22:.\main.c      ****     
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 2
+
+
+  23:.\main.c      ****     int state2 = 0; // state2 will hold the count for the states
+  36              		.loc 1 23 0
+  37 0006 0023     		mov	r3, #0
+  38 0008 7B60     		str	r3, [r7, #4]
+  24:.\main.c      ****        
+  25:.\main.c      ****     enum states state = NSGreen;    //Defining the intial state
+  39              		.loc 1 25 0
+  40 000a FB1C     		add	r3, r7, #3
+  41 000c 0022     		mov	r2, #0
+  42 000e 1A70     		strb	r2, [r3]
+  43              	.L83:
+  26:.\main.c      ****  
+  27:.\main.c      ****     
+  28:.\main.c      ****     for(;;){       
+  29:.\main.c      ****     if((!TLCMode_Read() && (!TLCMode1_Read())) && (!TLCMode2_Read())){
+  44              		.loc 1 29 0
+  45 0010 FFF7FEFF 		bl	TLCMode_Read
+  46 0014 031C     		mov	r3, r0
+  47 0016 002B     		cmp	r3, #0
+  48 0018 01D0     		beq	.LCB22
+  49 001a 00F0BAFC 		bl	.L2	@far jump
+  50              	.LCB22:
+  51              		.loc 1 29 0 is_stmt 0 discriminator 1
+  52 001e FFF7FEFF 		bl	TLCMode1_Read
+  53 0022 031C     		mov	r3, r0
+  54 0024 002B     		cmp	r3, #0
+  55 0026 01D0     		beq	.LCB26
+  56 0028 00F0B3FC 		bl	.L2	@far jump
+  57              	.LCB26:
+  58 002c FFF7FEFF 		bl	TLCMode2_Read
+  59 0030 031C     		mov	r3, r0
+  60 0032 002B     		cmp	r3, #0
+  61 0034 01D0     		beq	.LCB30
+  62 0036 00F0ACFC 		bl	.L2	@far jump
+  63              	.LCB30:
+  30:.\main.c      ****         if (state2 == 15) state2 = 0;
+  64              		.loc 1 30 0 is_stmt 1
+  65 003a 7B68     		ldr	r3, [r7, #4]
+  66 003c 0F2B     		cmp	r3, #15
+  67 003e 01D1     		bne	.L3
+  68              		.loc 1 30 0 is_stmt 0 discriminator 1
+  69 0040 0023     		mov	r3, #0
+  70 0042 7B60     		str	r3, [r7, #4]
+  71              	.L3:
+  31:.\main.c      ****         switch (state) {
+  72              		.loc 1 31 0 is_stmt 1
+  73 0044 FB1C     		add	r3, r7, #3
+  74 0046 1B78     		ldrb	r3, [r3]
+  75 0048 0C2B     		cmp	r3, #12
+  76 004a 01D9     		bls	.LCB41
+  77 004c 00F09EFC 		bl	.L4	@far jump
+  78              	.LCB41:
+  79 0050 9A00     		lsl	r2, r3, #2
+  80 0052 C54B     		ldr	r3, .L84
+  81 0054 D318     		add	r3, r2, r3
+  82 0056 1B68     		ldr	r3, [r3]
+  83 0058 9F46     		mov	pc, r3
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 3
+
+
+  84              		.section	.rodata
+  85              		.align	2
+  86              	.L6:
+  87 0000 5A000000 		.word	.L5
+  88 0004 38010000 		.word	.L7
+  89 0008 DE010000 		.word	.L8
+  90 000c CC020000 		.word	.L9
+  91 0010 78030000 		.word	.L10
+  92 0014 08040000 		.word	.L11
+  93 0018 AC040000 		.word	.L12
+  94 001c 48050000 		.word	.L13
+  95 0020 04060000 		.word	.L14
+  96 0024 C4060000 		.word	.L15
+  97 0028 6C070000 		.word	.L16
+  98 002c 2E080000 		.word	.L17
+  99 0030 D6080000 		.word	.L18
+ 100              		.section	.text.main
+ 101              	.L5:
+  32:.\main.c      ****             case NSGreen:
+  33:.\main.c      ****                 NGreen_Write(1), NYellow_Write(0), NRed_Write(0);
+ 102              		.loc 1 33 0
+ 103 005a 0120     		mov	r0, #1
+ 104 005c FFF7FEFF 		bl	NGreen_Write
+ 105 0060 0020     		mov	r0, #0
+ 106 0062 FFF7FEFF 		bl	NYellow_Write
+ 107 0066 0020     		mov	r0, #0
+ 108 0068 FFF7FEFF 		bl	NRed_Write
+  34:.\main.c      ****                 SGreen_Write(1), SYellow_Write(0), SRed_Write(0);
+ 109              		.loc 1 34 0
+ 110 006c 0120     		mov	r0, #1
+ 111 006e FFF7FEFF 		bl	SGreen_Write
+ 112 0072 0020     		mov	r0, #0
+ 113 0074 FFF7FEFF 		bl	SYellow_Write
+ 114 0078 0020     		mov	r0, #0
+ 115 007a FFF7FEFF 		bl	SRed_Write
+  35:.\main.c      ****                 WGreen_Write(0), WYellow_Write(0), WRed_Write(1);
+ 116              		.loc 1 35 0
+ 117 007e 0020     		mov	r0, #0
+ 118 0080 FFF7FEFF 		bl	WGreen_Write
+ 119 0084 0020     		mov	r0, #0
+ 120 0086 FFF7FEFF 		bl	WYellow_Write
+ 121 008a 0120     		mov	r0, #1
+ 122 008c FFF7FEFF 		bl	WRed_Write
+  36:.\main.c      ****                 EGreen_Write(0), EYellow_Write(0), ERed_Write(1);
+ 123              		.loc 1 36 0
+ 124 0090 0020     		mov	r0, #0
+ 125 0092 FFF7FEFF 		bl	EGreen_Write
+ 126 0096 0020     		mov	r0, #0
+ 127 0098 FFF7FEFF 		bl	EYellow_Write
+ 128 009c 0120     		mov	r0, #1
+ 129 009e FFF7FEFF 		bl	ERed_Write
+  37:.\main.c      ****                 NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 130              		.loc 1 37 0
+ 131 00a2 0020     		mov	r0, #0
+ 132 00a4 FFF7FEFF 		bl	NAGreen_Write
+ 133 00a8 0020     		mov	r0, #0
+ 134 00aa FFF7FEFF 		bl	NAYellow_Write
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 4
+
+
+ 135 00ae 0120     		mov	r0, #1
+ 136 00b0 FFF7FEFF 		bl	NARed_Write
+  38:.\main.c      ****                 SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 137              		.loc 1 38 0
+ 138 00b4 0020     		mov	r0, #0
+ 139 00b6 FFF7FEFF 		bl	SAGreen_Write
+ 140 00ba 0020     		mov	r0, #0
+ 141 00bc FFF7FEFF 		bl	SAYellow_Write
+ 142 00c0 0120     		mov	r0, #1
+ 143 00c2 FFF7FEFF 		bl	SARed_Write
+  39:.\main.c      ****                 if(state2 == 0)
+ 144              		.loc 1 39 0
+ 145 00c6 7B68     		ldr	r3, [r7, #4]
+ 146 00c8 002B     		cmp	r3, #0
+ 147 00ca 02D1     		bne	.L19
+  40:.\main.c      ****                     state = NSYellow;
+ 148              		.loc 1 40 0
+ 149 00cc FB1C     		add	r3, r7, #3
+ 150 00ce 0122     		mov	r2, #1
+ 151 00d0 1A70     		strb	r2, [r3]
+ 152              	.L19:
+  41:.\main.c      ****                 if(TLCMode_Read()){
+ 153              		.loc 1 41 0
+ 154 00d2 FFF7FEFF 		bl	TLCMode_Read
+ 155 00d6 031C     		mov	r3, r0
+ 156 00d8 002B     		cmp	r3, #0
+ 157 00da 2BD0     		beq	.L20
+  42:.\main.c      ****                     state2 = 0;
+ 158              		.loc 1 42 0
+ 159 00dc 0023     		mov	r3, #0
+ 160 00de 7B60     		str	r3, [r7, #4]
+  43:.\main.c      ****                     state = NSGreen; 
+ 161              		.loc 1 43 0
+ 162 00e0 FB1C     		add	r3, r7, #3
+ 163 00e2 0022     		mov	r2, #0
+ 164 00e4 1A70     		strb	r2, [r3]
+  44:.\main.c      ****                     CyDelay(3000);
+ 165              		.loc 1 44 0
+ 166 00e6 A14B     		ldr	r3, .L84+4
+ 167 00e8 181C     		mov	r0, r3
+ 168 00ea FFF7FEFF 		bl	CyDelay
+  45:.\main.c      ****                     NYellow_Write(1),NGreen_Write(0);
+ 169              		.loc 1 45 0
+ 170 00ee 0120     		mov	r0, #1
+ 171 00f0 FFF7FEFF 		bl	NYellow_Write
+ 172 00f4 0020     		mov	r0, #0
+ 173 00f6 FFF7FEFF 		bl	NGreen_Write
+  46:.\main.c      ****                     SYellow_Write(1), SGreen_Write(0);
+ 174              		.loc 1 46 0
+ 175 00fa 0120     		mov	r0, #1
+ 176 00fc FFF7FEFF 		bl	SYellow_Write
+ 177 0100 0020     		mov	r0, #0
+ 178 0102 FFF7FEFF 		bl	SGreen_Write
+  47:.\main.c      ****                     CyDelay(3000);
+ 179              		.loc 1 47 0
+ 180 0106 994B     		ldr	r3, .L84+4
+ 181 0108 181C     		mov	r0, r3
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 5
+
+
+ 182 010a FFF7FEFF 		bl	CyDelay
+  48:.\main.c      ****                     NRed_Write(1),NYellow_Write(0);
+ 183              		.loc 1 48 0
+ 184 010e 0120     		mov	r0, #1
+ 185 0110 FFF7FEFF 		bl	NRed_Write
+ 186 0114 0020     		mov	r0, #0
+ 187 0116 FFF7FEFF 		bl	NYellow_Write
+  49:.\main.c      ****                     SRed_Write(1), SYellow_Write(0);
+ 188              		.loc 1 49 0
+ 189 011a 0120     		mov	r0, #1
+ 190 011c FFF7FEFF 		bl	SRed_Write
+ 191 0120 0020     		mov	r0, #0
+ 192 0122 FFF7FEFF 		bl	SYellow_Write
+  50:.\main.c      ****                     CyDelay(2000);
+ 193              		.loc 1 50 0
+ 194 0126 FA23     		mov	r3, #250
+ 195 0128 DB00     		lsl	r3, r3, #3
+ 196 012a 181C     		mov	r0, r3
+ 197 012c FFF7FEFF 		bl	CyDelay
+  51:.\main.c      ****                     break;
+ 198              		.loc 1 51 0
+ 199 0130 00F02CFC 		bl	.L4	@ far jump
+ 200              	.L20:
+  52:.\main.c      ****                 } 
+  53:.\main.c      ****                 break;
+ 201              		.loc 1 53 0
+ 202 0134 00F02AFC 		bl	.L4	@ far jump
+ 203              	.L7:
+  54:.\main.c      ****             case NSYellow:
+  55:.\main.c      ****                 CyDelay (10000);
+ 204              		.loc 1 55 0
+ 205 0138 8D4B     		ldr	r3, .L84+8
+ 206 013a 181C     		mov	r0, r3
+ 207 013c FFF7FEFF 		bl	CyDelay
+  56:.\main.c      ****                 NGreen_Write(0), NYellow_Write(1);
+ 208              		.loc 1 56 0
+ 209 0140 0020     		mov	r0, #0
+ 210 0142 FFF7FEFF 		bl	NGreen_Write
+ 211 0146 0120     		mov	r0, #1
+ 212 0148 FFF7FEFF 		bl	NYellow_Write
+  57:.\main.c      ****                 SGreen_Write(0), SYellow_Write(1);
+ 213              		.loc 1 57 0
+ 214 014c 0020     		mov	r0, #0
+ 215 014e FFF7FEFF 		bl	SGreen_Write
+ 216 0152 0120     		mov	r0, #1
+ 217 0154 FFF7FEFF 		bl	SYellow_Write
+  58:.\main.c      ****                 WRed_Write(1);
+ 218              		.loc 1 58 0
+ 219 0158 0120     		mov	r0, #1
+ 220 015a FFF7FEFF 		bl	WRed_Write
+  59:.\main.c      ****                 ERed_Write(1);
+ 221              		.loc 1 59 0
+ 222 015e 0120     		mov	r0, #1
+ 223 0160 FFF7FEFF 		bl	ERed_Write
+  60:.\main.c      ****                 NARed_Write(1);
+ 224              		.loc 1 60 0
+ 225 0164 0120     		mov	r0, #1
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 6
+
+
+ 226 0166 FFF7FEFF 		bl	NARed_Write
+  61:.\main.c      ****                 SARed_Write(1);
+ 227              		.loc 1 61 0
+ 228 016a 0120     		mov	r0, #1
+ 229 016c FFF7FEFF 		bl	SARed_Write
+  62:.\main.c      ****                 if(state2 == 1)
+ 230              		.loc 1 62 0
+ 231 0170 7B68     		ldr	r3, [r7, #4]
+ 232 0172 012B     		cmp	r3, #1
+ 233 0174 02D1     		bne	.L21
+  63:.\main.c      ****                     state = AllRed;
+ 234              		.loc 1 63 0
+ 235 0176 FB1C     		add	r3, r7, #3
+ 236 0178 0222     		mov	r2, #2
+ 237 017a 1A70     		strb	r2, [r3]
+ 238              	.L21:
+  64:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 239              		.loc 1 64 0
+ 240 017c FFF7FEFF 		bl	TLCMode_Read
+ 241 0180 031C     		mov	r3, r0
+ 242 0182 002B     		cmp	r3, #0
+ 243 0184 09D1     		bne	.L22
+ 244              		.loc 1 64 0 is_stmt 0 discriminator 1
+ 245 0186 FFF7FEFF 		bl	TLCMode1_Read
+ 246 018a 031C     		mov	r3, r0
+ 247 018c 002B     		cmp	r3, #0
+ 248 018e 04D1     		bne	.L22
+ 249 0190 FFF7FEFF 		bl	TLCMode2_Read
+ 250 0194 031C     		mov	r3, r0
+ 251 0196 002B     		cmp	r3, #0
+ 252 0198 1BD0     		beq	.L23
+ 253              	.L22:
+  65:.\main.c      ****                     state2 = 0;
+ 254              		.loc 1 65 0 is_stmt 1
+ 255 019a 0023     		mov	r3, #0
+ 256 019c 7B60     		str	r3, [r7, #4]
+  66:.\main.c      ****                     state = NSGreen; 
+ 257              		.loc 1 66 0
+ 258 019e FB1C     		add	r3, r7, #3
+ 259 01a0 0022     		mov	r2, #0
+ 260 01a2 1A70     		strb	r2, [r3]
+  67:.\main.c      ****                     CyDelay(3000);
+ 261              		.loc 1 67 0
+ 262 01a4 714B     		ldr	r3, .L84+4
+ 263 01a6 181C     		mov	r0, r3
+ 264 01a8 FFF7FEFF 		bl	CyDelay
+  68:.\main.c      ****                     NRed_Write(1),NYellow_Write(0);
+ 265              		.loc 1 68 0
+ 266 01ac 0120     		mov	r0, #1
+ 267 01ae FFF7FEFF 		bl	NRed_Write
+ 268 01b2 0020     		mov	r0, #0
+ 269 01b4 FFF7FEFF 		bl	NYellow_Write
+  69:.\main.c      ****                     SRed_Write(1), SYellow_Write(0);
+ 270              		.loc 1 69 0
+ 271 01b8 0120     		mov	r0, #1
+ 272 01ba FFF7FEFF 		bl	SRed_Write
+ 273 01be 0020     		mov	r0, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 7
+
+
+ 274 01c0 FFF7FEFF 		bl	SYellow_Write
+  70:.\main.c      ****                     CyDelay(2000);
+ 275              		.loc 1 70 0
+ 276 01c4 FA23     		mov	r3, #250
+ 277 01c6 DB00     		lsl	r3, r3, #3
+ 278 01c8 181C     		mov	r0, r3
+ 279 01ca FFF7FEFF 		bl	CyDelay
+  71:.\main.c      ****                     break;
+ 280              		.loc 1 71 0
+ 281 01ce 00F0DDFB 		bl	.L4	@ far jump
+ 282              	.L23:
+  72:.\main.c      ****                 }
+  73:.\main.c      ****                 CyDelay (3000);
+ 283              		.loc 1 73 0
+ 284 01d2 664B     		ldr	r3, .L84+4
+ 285 01d4 181C     		mov	r0, r3
+ 286 01d6 FFF7FEFF 		bl	CyDelay
+  74:.\main.c      ****                 break;
+ 287              		.loc 1 74 0
+ 288 01da 00F0D7FB 		bl	.L4	@ far jump
+ 289              	.L8:
+  75:.\main.c      ****             case AllRed:  
+  76:.\main.c      ****                 
+  77:.\main.c      ****                 NYellow_Write(0), NRed_Write(1);
+ 290              		.loc 1 77 0
+ 291 01de 0020     		mov	r0, #0
+ 292 01e0 FFF7FEFF 		bl	NYellow_Write
+ 293 01e4 0120     		mov	r0, #1
+ 294 01e6 FFF7FEFF 		bl	NRed_Write
+  78:.\main.c      ****                 SYellow_Write(0), SRed_Write(1);
+ 295              		.loc 1 78 0
+ 296 01ea 0020     		mov	r0, #0
+ 297 01ec FFF7FEFF 		bl	SYellow_Write
+ 298 01f0 0120     		mov	r0, #1
+ 299 01f2 FFF7FEFF 		bl	SRed_Write
+  79:.\main.c      ****                 WYellow_Write(0), WRed_Write(1);
+ 300              		.loc 1 79 0
+ 301 01f6 0020     		mov	r0, #0
+ 302 01f8 FFF7FEFF 		bl	WYellow_Write
+ 303 01fc 0120     		mov	r0, #1
+ 304 01fe FFF7FEFF 		bl	WRed_Write
+  80:.\main.c      ****                 EYellow_Write(0), ERed_Write(1);
+ 305              		.loc 1 80 0
+ 306 0202 0020     		mov	r0, #0
+ 307 0204 FFF7FEFF 		bl	EYellow_Write
+ 308 0208 0120     		mov	r0, #1
+ 309 020a FFF7FEFF 		bl	ERed_Write
+  81:.\main.c      ****                 NARed_Write(1);
+ 310              		.loc 1 81 0
+ 311 020e 0120     		mov	r0, #1
+ 312 0210 FFF7FEFF 		bl	NARed_Write
+  82:.\main.c      ****                 SARed_Write(1);
+ 313              		.loc 1 82 0
+ 314 0214 0120     		mov	r0, #1
+ 315 0216 FFF7FEFF 		bl	SARed_Write
+  83:.\main.c      ****                 if(state2 == 2)
+ 316              		.loc 1 83 0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 8
+
+
+ 317 021a 7B68     		ldr	r3, [r7, #4]
+ 318 021c 022B     		cmp	r3, #2
+ 319 021e 02D1     		bne	.L24
+  84:.\main.c      ****                     state = WGreen;
+ 320              		.loc 1 84 0
+ 321 0220 FB1C     		add	r3, r7, #3
+ 322 0222 0322     		mov	r2, #3
+ 323 0224 1A70     		strb	r2, [r3]
+ 324              	.L24:
+  85:.\main.c      ****                 if((state2 == 5) && (ESensor_Read()))
+ 325              		.loc 1 85 0
+ 326 0226 7B68     		ldr	r3, [r7, #4]
+ 327 0228 052B     		cmp	r3, #5
+ 328 022a 07D1     		bne	.L25
+ 329              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 330 022c FFF7FEFF 		bl	ESensor_Read
+ 331 0230 031C     		mov	r3, r0
+ 332 0232 002B     		cmp	r3, #0
+ 333 0234 02D0     		beq	.L25
+  86:.\main.c      ****                 state = EGreen;
+ 334              		.loc 1 86 0 is_stmt 1
+ 335 0236 FB1C     		add	r3, r7, #3
+ 336 0238 0522     		mov	r2, #5
+ 337 023a 1A70     		strb	r2, [r3]
+ 338              	.L25:
+  87:.\main.c      ****                 if(((state2 == 5) && (!ESensor_Read())) || ((state2 == 8) && (NASensor_Read()))){
+ 339              		.loc 1 87 0
+ 340 023c 7B68     		ldr	r3, [r7, #4]
+ 341 023e 052B     		cmp	r3, #5
+ 342 0240 04D1     		bne	.L26
+ 343              		.loc 1 87 0 is_stmt 0 discriminator 1
+ 344 0242 FFF7FEFF 		bl	ESensor_Read
+ 345 0246 031C     		mov	r3, r0
+ 346 0248 002B     		cmp	r3, #0
+ 347 024a 07D0     		beq	.L27
+ 348              	.L26:
+ 349              		.loc 1 87 0 discriminator 2
+ 350 024c 7B68     		ldr	r3, [r7, #4]
+ 351 024e 082B     		cmp	r3, #8
+ 352 0250 0CD1     		bne	.L28
+ 353              		.loc 1 87 0 discriminator 1
+ 354 0252 FFF7FEFF 		bl	NASensor_Read
+ 355 0256 031C     		mov	r3, r0
+ 356 0258 002B     		cmp	r3, #0
+ 357 025a 07D0     		beq	.L28
+ 358              	.L27:
+  88:.\main.c      ****                     state = NASAGreen;
+ 359              		.loc 1 88 0 is_stmt 1
+ 360 025c FB1C     		add	r3, r7, #3
+ 361 025e 0722     		mov	r2, #7
+ 362 0260 1A70     		strb	r2, [r3]
+  89:.\main.c      ****                     if(state2 != 8) state2 = 8;
+ 363              		.loc 1 89 0
+ 364 0262 7B68     		ldr	r3, [r7, #4]
+ 365 0264 082B     		cmp	r3, #8
+ 366 0266 01D0     		beq	.L28
+ 367              		.loc 1 89 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 9
+
+
+ 368 0268 0823     		mov	r3, #8
+ 369 026a 7B60     		str	r3, [r7, #4]
+ 370              	.L28:
+  90:.\main.c      ****                 }if(((state2 == 5) && (!ESensor_Read()))|| ((state2 == 8) && (!NASensor_Read()))){
+ 371              		.loc 1 90 0 is_stmt 1
+ 372 026c 7B68     		ldr	r3, [r7, #4]
+ 373 026e 052B     		cmp	r3, #5
+ 374 0270 04D1     		bne	.L29
+ 375              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 376 0272 FFF7FEFF 		bl	ESensor_Read
+ 377 0276 031C     		mov	r3, r0
+ 378 0278 002B     		cmp	r3, #0
+ 379 027a 07D0     		beq	.L30
+ 380              	.L29:
+ 381              		.loc 1 90 0 discriminator 2
+ 382 027c 7B68     		ldr	r3, [r7, #4]
+ 383 027e 082B     		cmp	r3, #8
+ 384 0280 09D1     		bne	.L31
+ 385              		.loc 1 90 0 discriminator 1
+ 386 0282 FFF7FEFF 		bl	NASensor_Read
+ 387 0286 031C     		mov	r3, r0
+ 388 0288 002B     		cmp	r3, #0
+ 389 028a 04D1     		bne	.L31
+ 390              	.L30:
+  91:.\main.c      ****                     state = SSAGreen;
+ 391              		.loc 1 91 0 is_stmt 1
+ 392 028c FB1C     		add	r3, r7, #3
+ 393 028e 0A22     		mov	r2, #10
+ 394 0290 1A70     		strb	r2, [r3]
+  92:.\main.c      ****                     state2 = 11; 
+ 395              		.loc 1 92 0
+ 396 0292 0B23     		mov	r3, #11
+ 397 0294 7B60     		str	r3, [r7, #4]
+ 398              	.L31:
+  93:.\main.c      ****                 }if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 399              		.loc 1 93 0
+ 400 0296 FFF7FEFF 		bl	TLCMode_Read
+ 401 029a 031C     		mov	r3, r0
+ 402 029c 002B     		cmp	r3, #0
+ 403 029e 09D1     		bne	.L32
+ 404              		.loc 1 93 0 is_stmt 0 discriminator 1
+ 405 02a0 FFF7FEFF 		bl	TLCMode1_Read
+ 406 02a4 031C     		mov	r3, r0
+ 407 02a6 002B     		cmp	r3, #0
+ 408 02a8 04D1     		bne	.L32
+ 409 02aa FFF7FEFF 		bl	TLCMode2_Read
+ 410 02ae 031C     		mov	r3, r0
+ 411 02b0 002B     		cmp	r3, #0
+ 412 02b2 0AD0     		beq	.L33
+ 413              	.L32:
+  94:.\main.c      ****                     state2 = 0;
+ 414              		.loc 1 94 0 is_stmt 1
+ 415 02b4 0023     		mov	r3, #0
+ 416 02b6 7B60     		str	r3, [r7, #4]
+  95:.\main.c      ****                     state = NSGreen; 
+ 417              		.loc 1 95 0
+ 418 02b8 FB1C     		add	r3, r7, #3
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 10
+
+
+ 419 02ba 0022     		mov	r2, #0
+ 420 02bc 1A70     		strb	r2, [r3]
+  96:.\main.c      ****                     CyDelay(2000);
+ 421              		.loc 1 96 0
+ 422 02be FA23     		mov	r3, #250
+ 423 02c0 DB00     		lsl	r3, r3, #3
+ 424 02c2 181C     		mov	r0, r3
+ 425 02c4 FFF7FEFF 		bl	CyDelay
+  97:.\main.c      ****                     break;
+ 426              		.loc 1 97 0
+ 427 02c8 60E3     		b	.L4
+ 428              	.L33:
+  98:.\main.c      ****                 }break;
+ 429              		.loc 1 98 0
+ 430 02ca 5FE3     		b	.L4
+ 431              	.L9:
+  99:.\main.c      ****             case WGreen:
+ 100:.\main.c      ****                 CyDelay (1250);
+ 432              		.loc 1 100 0
+ 433 02cc 294B     		ldr	r3, .L84+12
+ 434 02ce 181C     		mov	r0, r3
+ 435 02d0 FFF7FEFF 		bl	CyDelay
+ 101:.\main.c      ****                 NRed_Write(1);
+ 436              		.loc 1 101 0
+ 437 02d4 0120     		mov	r0, #1
+ 438 02d6 FFF7FEFF 		bl	NRed_Write
+ 102:.\main.c      ****                 SRed_Write(1);
+ 439              		.loc 1 102 0
+ 440 02da 0120     		mov	r0, #1
+ 441 02dc FFF7FEFF 		bl	SRed_Write
+ 103:.\main.c      ****                 WRed_Write(0), WGreen_Write(1);
+ 442              		.loc 1 103 0
+ 443 02e0 0020     		mov	r0, #0
+ 444 02e2 FFF7FEFF 		bl	WRed_Write
+ 445 02e6 0120     		mov	r0, #1
+ 446 02e8 FFF7FEFF 		bl	WGreen_Write
+ 104:.\main.c      ****                 ERed_Write(1);
+ 447              		.loc 1 104 0
+ 448 02ec 0120     		mov	r0, #1
+ 449 02ee FFF7FEFF 		bl	ERed_Write
+ 105:.\main.c      ****                 NARed_Write(1);
+ 450              		.loc 1 105 0
+ 451 02f2 0120     		mov	r0, #1
+ 452 02f4 FFF7FEFF 		bl	NARed_Write
+ 106:.\main.c      ****                 SARed_Write(1);
+ 453              		.loc 1 106 0
+ 454 02f8 0120     		mov	r0, #1
+ 455 02fa FFF7FEFF 		bl	SARed_Write
+ 107:.\main.c      ****                 if(state2 == 3)
+ 456              		.loc 1 107 0
+ 457 02fe 7B68     		ldr	r3, [r7, #4]
+ 458 0300 032B     		cmp	r3, #3
+ 459 0302 02D1     		bne	.L34
+ 108:.\main.c      ****                     state = WYellow;
+ 460              		.loc 1 108 0
+ 461 0304 FB1C     		add	r3, r7, #3
+ 462 0306 0422     		mov	r2, #4
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 11
+
+
+ 463 0308 1A70     		strb	r2, [r3]
+ 464              	.L34:
+ 109:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 465              		.loc 1 109 0
+ 466 030a FFF7FEFF 		bl	TLCMode_Read
+ 467 030e 031C     		mov	r3, r0
+ 468 0310 002B     		cmp	r3, #0
+ 469 0312 09D1     		bne	.L35
+ 470              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 471 0314 FFF7FEFF 		bl	TLCMode1_Read
+ 472 0318 031C     		mov	r3, r0
+ 473 031a 002B     		cmp	r3, #0
+ 474 031c 04D1     		bne	.L35
+ 475 031e FFF7FEFF 		bl	TLCMode2_Read
+ 476 0322 031C     		mov	r3, r0
+ 477 0324 002B     		cmp	r3, #0
+ 478 0326 1ED0     		beq	.L36
+ 479              	.L35:
+ 110:.\main.c      ****                     state2 = 0;
+ 480              		.loc 1 110 0 is_stmt 1
+ 481 0328 0023     		mov	r3, #0
+ 482 032a 7B60     		str	r3, [r7, #4]
+ 111:.\main.c      ****                     state = NSGreen; 
+ 483              		.loc 1 111 0
+ 484 032c FB1C     		add	r3, r7, #3
+ 485 032e 0022     		mov	r2, #0
+ 486 0330 1A70     		strb	r2, [r3]
+ 112:.\main.c      ****                     CyDelay(3000);
+ 487              		.loc 1 112 0
+ 488 0332 0E4B     		ldr	r3, .L84+4
+ 489 0334 181C     		mov	r0, r3
+ 490 0336 FFF7FEFF 		bl	CyDelay
+ 113:.\main.c      ****                     WYellow_Write(1),WGreen_Write(0);
+ 491              		.loc 1 113 0
+ 492 033a 0120     		mov	r0, #1
+ 493 033c FFF7FEFF 		bl	WYellow_Write
+ 494 0340 0020     		mov	r0, #0
+ 495 0342 FFF7FEFF 		bl	WGreen_Write
+ 114:.\main.c      ****                     CyDelay(3000);
+ 496              		.loc 1 114 0
+ 497 0346 094B     		ldr	r3, .L84+4
+ 498 0348 181C     		mov	r0, r3
+ 499 034a FFF7FEFF 		bl	CyDelay
+ 115:.\main.c      ****                     WRed_Write(1),WYellow_Write(0);
+ 500              		.loc 1 115 0
+ 501 034e 0120     		mov	r0, #1
+ 502 0350 FFF7FEFF 		bl	WRed_Write
+ 503 0354 0020     		mov	r0, #0
+ 504 0356 FFF7FEFF 		bl	WYellow_Write
+ 116:.\main.c      ****                     CyDelay(2000);
+ 505              		.loc 1 116 0
+ 506 035a FA23     		mov	r3, #250
+ 507 035c DB00     		lsl	r3, r3, #3
+ 508 035e 181C     		mov	r0, r3
+ 509 0360 FFF7FEFF 		bl	CyDelay
+ 117:.\main.c      ****                     break;
+ 510              		.loc 1 117 0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 12
+
+
+ 511 0364 12E3     		b	.L4
+ 512              	.L36:
+ 118:.\main.c      ****                 }
+ 119:.\main.c      ****                 break;
+ 513              		.loc 1 119 0
+ 514 0366 11E3     		b	.L4
+ 515              	.L85:
+ 516              		.align	2
+ 517              	.L84:
+ 518 0368 00000000 		.word	.L6
+ 519 036c B80B0000 		.word	3000
+ 520 0370 10270000 		.word	10000
+ 521 0374 E2040000 		.word	1250
+ 522              	.L10:
+ 120:.\main.c      ****             case WYellow:
+ 121:.\main.c      ****                 CyDelay (7500);
+ 523              		.loc 1 121 0
+ 524 0378 CE4B     		ldr	r3, .L86
+ 525 037a 181C     		mov	r0, r3
+ 526 037c FFF7FEFF 		bl	CyDelay
+ 122:.\main.c      ****                 NRed_Write(1);
+ 527              		.loc 1 122 0
+ 528 0380 0120     		mov	r0, #1
+ 529 0382 FFF7FEFF 		bl	NRed_Write
+ 123:.\main.c      ****                 SRed_Write(1);
+ 530              		.loc 1 123 0
+ 531 0386 0120     		mov	r0, #1
+ 532 0388 FFF7FEFF 		bl	SRed_Write
+ 124:.\main.c      ****                 WGreen_Write(0), WYellow_Write(1);
+ 533              		.loc 1 124 0
+ 534 038c 0020     		mov	r0, #0
+ 535 038e FFF7FEFF 		bl	WGreen_Write
+ 536 0392 0120     		mov	r0, #1
+ 537 0394 FFF7FEFF 		bl	WYellow_Write
+ 125:.\main.c      ****                 ERed_Write(1);
+ 538              		.loc 1 125 0
+ 539 0398 0120     		mov	r0, #1
+ 540 039a FFF7FEFF 		bl	ERed_Write
+ 126:.\main.c      ****                 NARed_Write(1);
+ 541              		.loc 1 126 0
+ 542 039e 0120     		mov	r0, #1
+ 543 03a0 FFF7FEFF 		bl	NARed_Write
+ 127:.\main.c      ****                 SARed_Write(1);
+ 544              		.loc 1 127 0
+ 545 03a4 0120     		mov	r0, #1
+ 546 03a6 FFF7FEFF 		bl	SARed_Write
+ 128:.\main.c      ****                 if(state2 == 4)
+ 547              		.loc 1 128 0
+ 548 03aa 7B68     		ldr	r3, [r7, #4]
+ 549 03ac 042B     		cmp	r3, #4
+ 550 03ae 02D1     		bne	.L37
+ 129:.\main.c      ****                     state = AllRed;
+ 551              		.loc 1 129 0
+ 552 03b0 FB1C     		add	r3, r7, #3
+ 553 03b2 0222     		mov	r2, #2
+ 554 03b4 1A70     		strb	r2, [r3]
+ 555              	.L37:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 13
+
+
+ 130:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 556              		.loc 1 130 0
+ 557 03b6 FFF7FEFF 		bl	TLCMode_Read
+ 558 03ba 031C     		mov	r3, r0
+ 559 03bc 002B     		cmp	r3, #0
+ 560 03be 09D1     		bne	.L38
+ 561              		.loc 1 130 0 is_stmt 0 discriminator 1
+ 562 03c0 FFF7FEFF 		bl	TLCMode1_Read
+ 563 03c4 031C     		mov	r3, r0
+ 564 03c6 002B     		cmp	r3, #0
+ 565 03c8 04D1     		bne	.L38
+ 566 03ca FFF7FEFF 		bl	TLCMode2_Read
+ 567 03ce 031C     		mov	r3, r0
+ 568 03d0 002B     		cmp	r3, #0
+ 569 03d2 14D0     		beq	.L39
+ 570              	.L38:
+ 131:.\main.c      ****                     state2 = 0;
+ 571              		.loc 1 131 0 is_stmt 1
+ 572 03d4 0023     		mov	r3, #0
+ 573 03d6 7B60     		str	r3, [r7, #4]
+ 132:.\main.c      ****                     state = NSGreen; 
+ 574              		.loc 1 132 0
+ 575 03d8 FB1C     		add	r3, r7, #3
+ 576 03da 0022     		mov	r2, #0
+ 577 03dc 1A70     		strb	r2, [r3]
+ 133:.\main.c      ****                     CyDelay(3000);
+ 578              		.loc 1 133 0
+ 579 03de B64B     		ldr	r3, .L86+4
+ 580 03e0 181C     		mov	r0, r3
+ 581 03e2 FFF7FEFF 		bl	CyDelay
+ 134:.\main.c      ****                     WRed_Write(1),WYellow_Write(0);
+ 582              		.loc 1 134 0
+ 583 03e6 0120     		mov	r0, #1
+ 584 03e8 FFF7FEFF 		bl	WRed_Write
+ 585 03ec 0020     		mov	r0, #0
+ 586 03ee FFF7FEFF 		bl	WYellow_Write
+ 135:.\main.c      ****                     CyDelay(2000);
+ 587              		.loc 1 135 0
+ 588 03f2 FA23     		mov	r3, #250
+ 589 03f4 DB00     		lsl	r3, r3, #3
+ 590 03f6 181C     		mov	r0, r3
+ 591 03f8 FFF7FEFF 		bl	CyDelay
+ 136:.\main.c      ****                     break;
+ 592              		.loc 1 136 0
+ 593 03fc C6E2     		b	.L4
+ 594              	.L39:
+ 137:.\main.c      ****                 }
+ 138:.\main.c      ****                 CyDelay(2750);
+ 595              		.loc 1 138 0
+ 596 03fe AF4B     		ldr	r3, .L86+8
+ 597 0400 181C     		mov	r0, r3
+ 598 0402 FFF7FEFF 		bl	CyDelay
+ 139:.\main.c      ****                 break;
+ 599              		.loc 1 139 0
+ 600 0406 C1E2     		b	.L4
+ 601              	.L11:
+ 140:.\main.c      ****             case EGreen:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 14
+
+
+ 141:.\main.c      ****                 CyDelay (1000);
+ 602              		.loc 1 141 0
+ 603 0408 FA23     		mov	r3, #250
+ 604 040a 9B00     		lsl	r3, r3, #2
+ 605 040c 181C     		mov	r0, r3
+ 606 040e FFF7FEFF 		bl	CyDelay
+ 142:.\main.c      ****                 NRed_Write(1);
+ 607              		.loc 1 142 0
+ 608 0412 0120     		mov	r0, #1
+ 609 0414 FFF7FEFF 		bl	NRed_Write
+ 143:.\main.c      ****                 SRed_Write(1);
+ 610              		.loc 1 143 0
+ 611 0418 0120     		mov	r0, #1
+ 612 041a FFF7FEFF 		bl	SRed_Write
+ 144:.\main.c      ****                 WYellow_Write(0);
+ 613              		.loc 1 144 0
+ 614 041e 0020     		mov	r0, #0
+ 615 0420 FFF7FEFF 		bl	WYellow_Write
+ 145:.\main.c      ****                 WRed_Write(1);
+ 616              		.loc 1 145 0
+ 617 0424 0120     		mov	r0, #1
+ 618 0426 FFF7FEFF 		bl	WRed_Write
+ 146:.\main.c      ****                 ERed_Write(0), EGreen_Write(1);
+ 619              		.loc 1 146 0
+ 620 042a 0020     		mov	r0, #0
+ 621 042c FFF7FEFF 		bl	ERed_Write
+ 622 0430 0120     		mov	r0, #1
+ 623 0432 FFF7FEFF 		bl	EGreen_Write
+ 147:.\main.c      ****                 NARed_Write(1);
+ 624              		.loc 1 147 0
+ 625 0436 0120     		mov	r0, #1
+ 626 0438 FFF7FEFF 		bl	NARed_Write
+ 148:.\main.c      ****                 SARed_Write(1);
+ 627              		.loc 1 148 0
+ 628 043c 0120     		mov	r0, #1
+ 629 043e FFF7FEFF 		bl	SARed_Write
+ 149:.\main.c      ****                 if(state2 == 6)
+ 630              		.loc 1 149 0
+ 631 0442 7B68     		ldr	r3, [r7, #4]
+ 632 0444 062B     		cmp	r3, #6
+ 633 0446 02D1     		bne	.L40
+ 150:.\main.c      ****                     state = EYellow;
+ 634              		.loc 1 150 0
+ 635 0448 FB1C     		add	r3, r7, #3
+ 636 044a 0622     		mov	r2, #6
+ 637 044c 1A70     		strb	r2, [r3]
+ 638              	.L40:
+ 151:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 639              		.loc 1 151 0
+ 640 044e FFF7FEFF 		bl	TLCMode_Read
+ 641 0452 031C     		mov	r3, r0
+ 642 0454 002B     		cmp	r3, #0
+ 643 0456 09D1     		bne	.L41
+ 644              		.loc 1 151 0 is_stmt 0 discriminator 1
+ 645 0458 FFF7FEFF 		bl	TLCMode1_Read
+ 646 045c 031C     		mov	r3, r0
+ 647 045e 002B     		cmp	r3, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 15
+
+
+ 648 0460 04D1     		bne	.L41
+ 649 0462 FFF7FEFF 		bl	TLCMode2_Read
+ 650 0466 031C     		mov	r3, r0
+ 651 0468 002B     		cmp	r3, #0
+ 652 046a 1ED0     		beq	.L42
+ 653              	.L41:
+ 152:.\main.c      ****                     state2 = 0;
+ 654              		.loc 1 152 0 is_stmt 1
+ 655 046c 0023     		mov	r3, #0
+ 656 046e 7B60     		str	r3, [r7, #4]
+ 153:.\main.c      ****                     state = NSGreen; 
+ 657              		.loc 1 153 0
+ 658 0470 FB1C     		add	r3, r7, #3
+ 659 0472 0022     		mov	r2, #0
+ 660 0474 1A70     		strb	r2, [r3]
+ 154:.\main.c      ****                     CyDelay(3000);
+ 661              		.loc 1 154 0
+ 662 0476 904B     		ldr	r3, .L86+4
+ 663 0478 181C     		mov	r0, r3
+ 664 047a FFF7FEFF 		bl	CyDelay
+ 155:.\main.c      ****                     EYellow_Write(1),EGreen_Write(0);
+ 665              		.loc 1 155 0
+ 666 047e 0120     		mov	r0, #1
+ 667 0480 FFF7FEFF 		bl	EYellow_Write
+ 668 0484 0020     		mov	r0, #0
+ 669 0486 FFF7FEFF 		bl	EGreen_Write
+ 156:.\main.c      ****                     CyDelay(3000);
+ 670              		.loc 1 156 0
+ 671 048a 8B4B     		ldr	r3, .L86+4
+ 672 048c 181C     		mov	r0, r3
+ 673 048e FFF7FEFF 		bl	CyDelay
+ 157:.\main.c      ****                     ERed_Write(1),EYellow_Write(0);
+ 674              		.loc 1 157 0
+ 675 0492 0120     		mov	r0, #1
+ 676 0494 FFF7FEFF 		bl	ERed_Write
+ 677 0498 0020     		mov	r0, #0
+ 678 049a FFF7FEFF 		bl	EYellow_Write
+ 158:.\main.c      ****                     CyDelay(2000);
+ 679              		.loc 1 158 0
+ 680 049e FA23     		mov	r3, #250
+ 681 04a0 DB00     		lsl	r3, r3, #3
+ 682 04a2 181C     		mov	r0, r3
+ 683 04a4 FFF7FEFF 		bl	CyDelay
+ 159:.\main.c      ****                     break;
+ 684              		.loc 1 159 0
+ 685 04a8 70E2     		b	.L4
+ 686              	.L42:
+ 160:.\main.c      ****                 }
+ 161:.\main.c      ****                 break;
+ 687              		.loc 1 161 0
+ 688 04aa 6FE2     		b	.L4
+ 689              	.L12:
+ 162:.\main.c      ****             case EYellow:
+ 163:.\main.c      ****                 CyDelay (5000);
+ 690              		.loc 1 163 0
+ 691 04ac 844B     		ldr	r3, .L86+12
+ 692 04ae 181C     		mov	r0, r3
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 16
+
+
+ 693 04b0 FFF7FEFF 		bl	CyDelay
+ 164:.\main.c      ****                 NRed_Write(1);
+ 694              		.loc 1 164 0
+ 695 04b4 0120     		mov	r0, #1
+ 696 04b6 FFF7FEFF 		bl	NRed_Write
+ 165:.\main.c      ****                 SRed_Write(1);
+ 697              		.loc 1 165 0
+ 698 04ba 0120     		mov	r0, #1
+ 699 04bc FFF7FEFF 		bl	SRed_Write
+ 166:.\main.c      ****                 WRed_Write(1);
+ 700              		.loc 1 166 0
+ 701 04c0 0120     		mov	r0, #1
+ 702 04c2 FFF7FEFF 		bl	WRed_Write
+ 167:.\main.c      ****                 ERed_Write(0), EGreen_Write(0), EYellow_Write(1);
+ 703              		.loc 1 167 0
+ 704 04c6 0020     		mov	r0, #0
+ 705 04c8 FFF7FEFF 		bl	ERed_Write
+ 706 04cc 0020     		mov	r0, #0
+ 707 04ce FFF7FEFF 		bl	EGreen_Write
+ 708 04d2 0120     		mov	r0, #1
+ 709 04d4 FFF7FEFF 		bl	EYellow_Write
+ 168:.\main.c      ****                 NARed_Write(1);
+ 710              		.loc 1 168 0
+ 711 04d8 0120     		mov	r0, #1
+ 712 04da FFF7FEFF 		bl	NARed_Write
+ 169:.\main.c      ****                 SARed_Write(1);
+ 713              		.loc 1 169 0
+ 714 04de 0120     		mov	r0, #1
+ 715 04e0 FFF7FEFF 		bl	SARed_Write
+ 170:.\main.c      ****                 if(state2 == 7)
+ 716              		.loc 1 170 0
+ 717 04e4 7B68     		ldr	r3, [r7, #4]
+ 718 04e6 072B     		cmp	r3, #7
+ 719 04e8 02D1     		bne	.L43
+ 171:.\main.c      ****                     state = AllRed;
+ 720              		.loc 1 171 0
+ 721 04ea FB1C     		add	r3, r7, #3
+ 722 04ec 0222     		mov	r2, #2
+ 723 04ee 1A70     		strb	r2, [r3]
+ 724              	.L43:
+ 172:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 725              		.loc 1 172 0
+ 726 04f0 FFF7FEFF 		bl	TLCMode_Read
+ 727 04f4 031C     		mov	r3, r0
+ 728 04f6 002B     		cmp	r3, #0
+ 729 04f8 09D1     		bne	.L44
+ 730              		.loc 1 172 0 is_stmt 0 discriminator 1
+ 731 04fa FFF7FEFF 		bl	TLCMode1_Read
+ 732 04fe 031C     		mov	r3, r0
+ 733 0500 002B     		cmp	r3, #0
+ 734 0502 04D1     		bne	.L44
+ 735 0504 FFF7FEFF 		bl	TLCMode2_Read
+ 736 0508 031C     		mov	r3, r0
+ 737 050a 002B     		cmp	r3, #0
+ 738 050c 14D0     		beq	.L45
+ 739              	.L44:
+ 173:.\main.c      ****                     state2 = 0;
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 17
+
+
+ 740              		.loc 1 173 0 is_stmt 1
+ 741 050e 0023     		mov	r3, #0
+ 742 0510 7B60     		str	r3, [r7, #4]
+ 174:.\main.c      ****                     state = NSGreen; 
+ 743              		.loc 1 174 0
+ 744 0512 FB1C     		add	r3, r7, #3
+ 745 0514 0022     		mov	r2, #0
+ 746 0516 1A70     		strb	r2, [r3]
+ 175:.\main.c      ****                     CyDelay(3000);
+ 747              		.loc 1 175 0
+ 748 0518 674B     		ldr	r3, .L86+4
+ 749 051a 181C     		mov	r0, r3
+ 750 051c FFF7FEFF 		bl	CyDelay
+ 176:.\main.c      ****                     ERed_Write(1),EYellow_Write(0);
+ 751              		.loc 1 176 0
+ 752 0520 0120     		mov	r0, #1
+ 753 0522 FFF7FEFF 		bl	ERed_Write
+ 754 0526 0020     		mov	r0, #0
+ 755 0528 FFF7FEFF 		bl	EYellow_Write
+ 177:.\main.c      ****                     CyDelay(2000);
+ 756              		.loc 1 177 0
+ 757 052c FA23     		mov	r3, #250
+ 758 052e DB00     		lsl	r3, r3, #3
+ 759 0530 181C     		mov	r0, r3
+ 760 0532 FFF7FEFF 		bl	CyDelay
+ 178:.\main.c      ****                     break;
+ 761              		.loc 1 178 0
+ 762 0536 29E2     		b	.L4
+ 763              	.L45:
+ 179:.\main.c      ****                 }
+ 180:.\main.c      ****                 CyDelay (2750);
+ 764              		.loc 1 180 0
+ 765 0538 604B     		ldr	r3, .L86+8
+ 766 053a 181C     		mov	r0, r3
+ 767 053c FFF7FEFF 		bl	CyDelay
+ 181:.\main.c      ****                 EYellow_Write(0);
+ 768              		.loc 1 181 0
+ 769 0540 0020     		mov	r0, #0
+ 770 0542 FFF7FEFF 		bl	EYellow_Write
+ 182:.\main.c      ****                 break;
+ 771              		.loc 1 182 0
+ 772 0546 21E2     		b	.L4
+ 773              	.L13:
+ 183:.\main.c      ****             case NASAGreen:
+ 184:.\main.c      ****                 CyDelay(1000);
+ 774              		.loc 1 184 0
+ 775 0548 FA23     		mov	r3, #250
+ 776 054a 9B00     		lsl	r3, r3, #2
+ 777 054c 181C     		mov	r0, r3
+ 778 054e FFF7FEFF 		bl	CyDelay
+ 185:.\main.c      ****                 NRed_Write(1);
+ 779              		.loc 1 185 0
+ 780 0552 0120     		mov	r0, #1
+ 781 0554 FFF7FEFF 		bl	NRed_Write
+ 186:.\main.c      ****                 SRed_Write(1);
+ 782              		.loc 1 186 0
+ 783 0558 0120     		mov	r0, #1
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 18
+
+
+ 784 055a FFF7FEFF 		bl	SRed_Write
+ 187:.\main.c      ****                 WRed_Write(1);
+ 785              		.loc 1 187 0
+ 786 055e 0120     		mov	r0, #1
+ 787 0560 FFF7FEFF 		bl	WRed_Write
+ 188:.\main.c      ****                 ERed_Write(1);
+ 788              		.loc 1 188 0
+ 789 0564 0120     		mov	r0, #1
+ 790 0566 FFF7FEFF 		bl	ERed_Write
+ 189:.\main.c      ****                 NARed_Write(0), NAGreen_Write(1);
+ 791              		.loc 1 189 0
+ 792 056a 0020     		mov	r0, #0
+ 793 056c FFF7FEFF 		bl	NARed_Write
+ 794 0570 0120     		mov	r0, #1
+ 795 0572 FFF7FEFF 		bl	NAGreen_Write
+ 190:.\main.c      ****                 SARed_Write(0), SAGreen_Write(1);
+ 796              		.loc 1 190 0
+ 797 0576 0020     		mov	r0, #0
+ 798 0578 FFF7FEFF 		bl	SARed_Write
+ 799 057c 0120     		mov	r0, #1
+ 800 057e FFF7FEFF 		bl	SAGreen_Write
+ 191:.\main.c      ****                 if(state2 == 9)
+ 801              		.loc 1 191 0
+ 802 0582 7B68     		ldr	r3, [r7, #4]
+ 803 0584 092B     		cmp	r3, #9
+ 804 0586 02D1     		bne	.L46
+ 192:.\main.c      ****                     state = NASAYellow;
+ 805              		.loc 1 192 0
+ 806 0588 FB1C     		add	r3, r7, #3
+ 807 058a 0822     		mov	r2, #8
+ 808 058c 1A70     		strb	r2, [r3]
+ 809              	.L46:
+ 193:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 810              		.loc 1 193 0
+ 811 058e FFF7FEFF 		bl	TLCMode_Read
+ 812 0592 031C     		mov	r3, r0
+ 813 0594 002B     		cmp	r3, #0
+ 814 0596 09D1     		bne	.L47
+ 815              		.loc 1 193 0 is_stmt 0 discriminator 1
+ 816 0598 FFF7FEFF 		bl	TLCMode1_Read
+ 817 059c 031C     		mov	r3, r0
+ 818 059e 002B     		cmp	r3, #0
+ 819 05a0 04D1     		bne	.L47
+ 820 05a2 FFF7FEFF 		bl	TLCMode2_Read
+ 821 05a6 031C     		mov	r3, r0
+ 822 05a8 002B     		cmp	r3, #0
+ 823 05aa 2AD0     		beq	.L48
+ 824              	.L47:
+ 194:.\main.c      ****                     state2 = 0;
+ 825              		.loc 1 194 0 is_stmt 1
+ 826 05ac 0023     		mov	r3, #0
+ 827 05ae 7B60     		str	r3, [r7, #4]
+ 195:.\main.c      ****                     state = NSGreen; 
+ 828              		.loc 1 195 0
+ 829 05b0 FB1C     		add	r3, r7, #3
+ 830 05b2 0022     		mov	r2, #0
+ 831 05b4 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 19
+
+
+ 196:.\main.c      ****                     CyDelay(3000);
+ 832              		.loc 1 196 0
+ 833 05b6 404B     		ldr	r3, .L86+4
+ 834 05b8 181C     		mov	r0, r3
+ 835 05ba FFF7FEFF 		bl	CyDelay
+ 197:.\main.c      ****                     NAYellow_Write(1),NAGreen_Write(0);
+ 836              		.loc 1 197 0
+ 837 05be 0120     		mov	r0, #1
+ 838 05c0 FFF7FEFF 		bl	NAYellow_Write
+ 839 05c4 0020     		mov	r0, #0
+ 840 05c6 FFF7FEFF 		bl	NAGreen_Write
+ 198:.\main.c      ****                     SAYellow_Write(1), SAGreen_Write(0);
+ 841              		.loc 1 198 0
+ 842 05ca 0120     		mov	r0, #1
+ 843 05cc FFF7FEFF 		bl	SAYellow_Write
+ 844 05d0 0020     		mov	r0, #0
+ 845 05d2 FFF7FEFF 		bl	SAGreen_Write
+ 199:.\main.c      ****                     CyDelay(3000);
+ 846              		.loc 1 199 0
+ 847 05d6 384B     		ldr	r3, .L86+4
+ 848 05d8 181C     		mov	r0, r3
+ 849 05da FFF7FEFF 		bl	CyDelay
+ 200:.\main.c      ****                     NARed_Write(1),NAYellow_Write(0);
+ 850              		.loc 1 200 0
+ 851 05de 0120     		mov	r0, #1
+ 852 05e0 FFF7FEFF 		bl	NARed_Write
+ 853 05e4 0020     		mov	r0, #0
+ 854 05e6 FFF7FEFF 		bl	NAYellow_Write
+ 201:.\main.c      ****                     SARed_Write(1), SAYellow_Write(0);
+ 855              		.loc 1 201 0
+ 856 05ea 0120     		mov	r0, #1
+ 857 05ec FFF7FEFF 		bl	SARed_Write
+ 858 05f0 0020     		mov	r0, #0
+ 859 05f2 FFF7FEFF 		bl	SAYellow_Write
+ 202:.\main.c      ****                     CyDelay(2000);
+ 860              		.loc 1 202 0
+ 861 05f6 FA23     		mov	r3, #250
+ 862 05f8 DB00     		lsl	r3, r3, #3
+ 863 05fa 181C     		mov	r0, r3
+ 864 05fc FFF7FEFF 		bl	CyDelay
+ 203:.\main.c      ****                     break;
+ 865              		.loc 1 203 0
+ 866 0600 C4E1     		b	.L4
+ 867              	.L48:
+ 204:.\main.c      ****                 }
+ 205:.\main.c      ****                 break;
+ 868              		.loc 1 205 0
+ 869 0602 C3E1     		b	.L4
+ 870              	.L14:
+ 206:.\main.c      ****             case NASAYellow:
+ 207:.\main.c      ****                 CyDelay (4000);
+ 871              		.loc 1 207 0
+ 872 0604 FA23     		mov	r3, #250
+ 873 0606 1B01     		lsl	r3, r3, #4
+ 874 0608 181C     		mov	r0, r3
+ 875 060a FFF7FEFF 		bl	CyDelay
+ 208:.\main.c      ****                 NRed_Write(1);
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 20
+
+
+ 876              		.loc 1 208 0
+ 877 060e 0120     		mov	r0, #1
+ 878 0610 FFF7FEFF 		bl	NRed_Write
+ 209:.\main.c      ****                 SRed_Write(1);
+ 879              		.loc 1 209 0
+ 880 0614 0120     		mov	r0, #1
+ 881 0616 FFF7FEFF 		bl	SRed_Write
+ 210:.\main.c      ****                 WRed_Write(1);
+ 882              		.loc 1 210 0
+ 883 061a 0120     		mov	r0, #1
+ 884 061c FFF7FEFF 		bl	WRed_Write
+ 211:.\main.c      ****                 ERed_Write(1);
+ 885              		.loc 1 211 0
+ 886 0620 0120     		mov	r0, #1
+ 887 0622 FFF7FEFF 		bl	ERed_Write
+ 212:.\main.c      ****                 NAGreen_Write(0), NAYellow_Write(1);
+ 888              		.loc 1 212 0
+ 889 0626 0020     		mov	r0, #0
+ 890 0628 FFF7FEFF 		bl	NAGreen_Write
+ 891 062c 0120     		mov	r0, #1
+ 892 062e FFF7FEFF 		bl	NAYellow_Write
+ 213:.\main.c      ****                 SAGreen_Write(0), SAGreen_Write(1);
+ 893              		.loc 1 213 0
+ 894 0632 0020     		mov	r0, #0
+ 895 0634 FFF7FEFF 		bl	SAGreen_Write
+ 896 0638 0120     		mov	r0, #1
+ 897 063a FFF7FEFF 		bl	SAGreen_Write
+ 214:.\main.c      ****                 if(state2 == 10)
+ 898              		.loc 1 214 0
+ 899 063e 7B68     		ldr	r3, [r7, #4]
+ 900 0640 0A2B     		cmp	r3, #10
+ 901 0642 02D1     		bne	.L49
+ 215:.\main.c      ****                     state = SAGreen;
+ 902              		.loc 1 215 0
+ 903 0644 FB1C     		add	r3, r7, #3
+ 904 0646 0922     		mov	r2, #9
+ 905 0648 1A70     		strb	r2, [r3]
+ 906              	.L49:
+ 216:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 907              		.loc 1 216 0
+ 908 064a FFF7FEFF 		bl	TLCMode_Read
+ 909 064e 031C     		mov	r3, r0
+ 910 0650 002B     		cmp	r3, #0
+ 911 0652 09D1     		bne	.L50
+ 912              		.loc 1 216 0 is_stmt 0 discriminator 1
+ 913 0654 FFF7FEFF 		bl	TLCMode1_Read
+ 914 0658 031C     		mov	r3, r0
+ 915 065a 002B     		cmp	r3, #0
+ 916 065c 04D1     		bne	.L50
+ 917 065e FFF7FEFF 		bl	TLCMode2_Read
+ 918 0662 031C     		mov	r3, r0
+ 919 0664 002B     		cmp	r3, #0
+ 920 0666 24D0     		beq	.L51
+ 921              	.L50:
+ 217:.\main.c      ****                     state2 = 0;
+ 922              		.loc 1 217 0 is_stmt 1
+ 923 0668 0023     		mov	r3, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 21
+
+
+ 924 066a 7B60     		str	r3, [r7, #4]
+ 218:.\main.c      ****                     state = NSGreen; 
+ 925              		.loc 1 218 0
+ 926 066c FB1C     		add	r3, r7, #3
+ 927 066e 0022     		mov	r2, #0
+ 928 0670 1A70     		strb	r2, [r3]
+ 219:.\main.c      ****                     CyDelay(3000);
+ 929              		.loc 1 219 0
+ 930 0672 114B     		ldr	r3, .L86+4
+ 931 0674 181C     		mov	r0, r3
+ 932 0676 FFF7FEFF 		bl	CyDelay
+ 220:.\main.c      ****                     SAGreen_Write(0), SAYellow_Write(1);
+ 933              		.loc 1 220 0
+ 934 067a 0020     		mov	r0, #0
+ 935 067c FFF7FEFF 		bl	SAGreen_Write
+ 936 0680 0120     		mov	r0, #1
+ 937 0682 FFF7FEFF 		bl	SAYellow_Write
+ 221:.\main.c      ****                     CyDelay(3000);
+ 938              		.loc 1 221 0
+ 939 0686 0C4B     		ldr	r3, .L86+4
+ 940 0688 181C     		mov	r0, r3
+ 941 068a FFF7FEFF 		bl	CyDelay
+ 222:.\main.c      ****                     NARed_Write(1),NAYellow_Write(0);
+ 942              		.loc 1 222 0
+ 943 068e 0120     		mov	r0, #1
+ 944 0690 FFF7FEFF 		bl	NARed_Write
+ 945 0694 0020     		mov	r0, #0
+ 946 0696 FFF7FEFF 		bl	NAYellow_Write
+ 223:.\main.c      ****                     SARed_Write(1), SAYellow_Write(0);
+ 947              		.loc 1 223 0
+ 948 069a 0120     		mov	r0, #1
+ 949 069c FFF7FEFF 		bl	SARed_Write
+ 950 06a0 0020     		mov	r0, #0
+ 951 06a2 FFF7FEFF 		bl	SAYellow_Write
+ 224:.\main.c      ****                     CyDelay(2000);
+ 952              		.loc 1 224 0
+ 953 06a6 FA23     		mov	r3, #250
+ 954 06a8 DB00     		lsl	r3, r3, #3
+ 955 06aa 181C     		mov	r0, r3
+ 956 06ac FFF7FEFF 		bl	CyDelay
+ 225:.\main.c      ****                     break;
+ 957              		.loc 1 225 0
+ 958 06b0 6CE1     		b	.L4
+ 959              	.L51:
+ 226:.\main.c      ****                 }
+ 227:.\main.c      ****                 break;    
+ 960              		.loc 1 227 0
+ 961 06b2 6BE1     		b	.L4
+ 962              	.L87:
+ 963              		.align	2
+ 964              	.L86:
+ 965 06b4 4C1D0000 		.word	7500
+ 966 06b8 B80B0000 		.word	3000
+ 967 06bc BE0A0000 		.word	2750
+ 968 06c0 88130000 		.word	5000
+ 969              	.L15:
+ 228:.\main.c      ****             case SAGreen:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 22
+
+
+ 229:.\main.c      ****                 CyDelay (2500);
+ 970              		.loc 1 229 0
+ 971 06c4 AA4B     		ldr	r3, .L88
+ 972 06c6 181C     		mov	r0, r3
+ 973 06c8 FFF7FEFF 		bl	CyDelay
+ 230:.\main.c      ****                 NRed_Write(1);
+ 974              		.loc 1 230 0
+ 975 06cc 0120     		mov	r0, #1
+ 976 06ce FFF7FEFF 		bl	NRed_Write
+ 231:.\main.c      ****                 SRed_Write(1);
+ 977              		.loc 1 231 0
+ 978 06d2 0120     		mov	r0, #1
+ 979 06d4 FFF7FEFF 		bl	SRed_Write
+ 232:.\main.c      ****                 WRed_Write(1);
+ 980              		.loc 1 232 0
+ 981 06d8 0120     		mov	r0, #1
+ 982 06da FFF7FEFF 		bl	WRed_Write
+ 233:.\main.c      ****                 EYellow_Write(0), ERed_Write(1);
+ 983              		.loc 1 233 0
+ 984 06de 0020     		mov	r0, #0
+ 985 06e0 FFF7FEFF 		bl	EYellow_Write
+ 986 06e4 0120     		mov	r0, #1
+ 987 06e6 FFF7FEFF 		bl	ERed_Write
+ 234:.\main.c      ****                 NAYellow_Write(0), NARed_Write(1);
+ 988              		.loc 1 234 0
+ 989 06ea 0020     		mov	r0, #0
+ 990 06ec FFF7FEFF 		bl	NAYellow_Write
+ 991 06f0 0120     		mov	r0, #1
+ 992 06f2 FFF7FEFF 		bl	NARed_Write
+ 235:.\main.c      ****                 SAYellow_Write(0), SAGreen_Write(1);
+ 993              		.loc 1 235 0
+ 994 06f6 0020     		mov	r0, #0
+ 995 06f8 FFF7FEFF 		bl	SAYellow_Write
+ 996 06fc 0120     		mov	r0, #1
+ 997 06fe FFF7FEFF 		bl	SAGreen_Write
+ 236:.\main.c      ****                 if(state2 == 11)
+ 998              		.loc 1 236 0
+ 999 0702 7B68     		ldr	r3, [r7, #4]
+ 1000 0704 0B2B     		cmp	r3, #11
+ 1001 0706 02D1     		bne	.L52
+ 237:.\main.c      ****                     state = SSAGreen;
+ 1002              		.loc 1 237 0
+ 1003 0708 FB1C     		add	r3, r7, #3
+ 1004 070a 0A22     		mov	r2, #10
+ 1005 070c 1A70     		strb	r2, [r3]
+ 1006              	.L52:
+ 238:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 1007              		.loc 1 238 0
+ 1008 070e FFF7FEFF 		bl	TLCMode_Read
+ 1009 0712 031C     		mov	r3, r0
+ 1010 0714 002B     		cmp	r3, #0
+ 1011 0716 09D1     		bne	.L53
+ 1012              		.loc 1 238 0 is_stmt 0 discriminator 1
+ 1013 0718 FFF7FEFF 		bl	TLCMode1_Read
+ 1014 071c 031C     		mov	r3, r0
+ 1015 071e 002B     		cmp	r3, #0
+ 1016 0720 04D1     		bne	.L53
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 23
+
+
+ 1017 0722 FFF7FEFF 		bl	TLCMode2_Read
+ 1018 0726 031C     		mov	r3, r0
+ 1019 0728 002B     		cmp	r3, #0
+ 1020 072a 1ED0     		beq	.L54
+ 1021              	.L53:
+ 239:.\main.c      ****                     state2 = 0;
+ 1022              		.loc 1 239 0 is_stmt 1
+ 1023 072c 0023     		mov	r3, #0
+ 1024 072e 7B60     		str	r3, [r7, #4]
+ 240:.\main.c      ****                     state = NSGreen; 
+ 1025              		.loc 1 240 0
+ 1026 0730 FB1C     		add	r3, r7, #3
+ 1027 0732 0022     		mov	r2, #0
+ 1028 0734 1A70     		strb	r2, [r3]
+ 241:.\main.c      ****                     CyDelay(3000);
+ 1029              		.loc 1 241 0
+ 1030 0736 8F4B     		ldr	r3, .L88+4
+ 1031 0738 181C     		mov	r0, r3
+ 1032 073a FFF7FEFF 		bl	CyDelay
+ 242:.\main.c      ****                     SAYellow_Write(1),SAGreen_Write(0);
+ 1033              		.loc 1 242 0
+ 1034 073e 0120     		mov	r0, #1
+ 1035 0740 FFF7FEFF 		bl	SAYellow_Write
+ 1036 0744 0020     		mov	r0, #0
+ 1037 0746 FFF7FEFF 		bl	SAGreen_Write
+ 243:.\main.c      ****                     CyDelay(3000);
+ 1038              		.loc 1 243 0
+ 1039 074a 8A4B     		ldr	r3, .L88+4
+ 1040 074c 181C     		mov	r0, r3
+ 1041 074e FFF7FEFF 		bl	CyDelay
+ 244:.\main.c      ****                     SARed_Write(1), SAYellow_Write(0);
+ 1042              		.loc 1 244 0
+ 1043 0752 0120     		mov	r0, #1
+ 1044 0754 FFF7FEFF 		bl	SARed_Write
+ 1045 0758 0020     		mov	r0, #0
+ 1046 075a FFF7FEFF 		bl	SAYellow_Write
+ 245:.\main.c      ****                     CyDelay(2000);
+ 1047              		.loc 1 245 0
+ 1048 075e FA23     		mov	r3, #250
+ 1049 0760 DB00     		lsl	r3, r3, #3
+ 1050 0762 181C     		mov	r0, r3
+ 1051 0764 FFF7FEFF 		bl	CyDelay
+ 246:.\main.c      ****                     break;
+ 1052              		.loc 1 246 0
+ 1053 0768 10E1     		b	.L4
+ 1054              	.L54:
+ 247:.\main.c      ****                 }
+ 248:.\main.c      ****                 break;
+ 1055              		.loc 1 248 0
+ 1056 076a 0FE1     		b	.L4
+ 1057              	.L16:
+ 249:.\main.c      ****             case SSAGreen:
+ 250:.\main.c      ****                 CyDelay (1000);
+ 1058              		.loc 1 250 0
+ 1059 076c FA23     		mov	r3, #250
+ 1060 076e 9B00     		lsl	r3, r3, #2
+ 1061 0770 181C     		mov	r0, r3
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 24
+
+
+ 1062 0772 FFF7FEFF 		bl	CyDelay
+ 251:.\main.c      ****                 NRed_Write(1);
+ 1063              		.loc 1 251 0
+ 1064 0776 0120     		mov	r0, #1
+ 1065 0778 FFF7FEFF 		bl	NRed_Write
+ 252:.\main.c      ****                 SRed_Write(0), SGreen_Write(1);
+ 1066              		.loc 1 252 0
+ 1067 077c 0020     		mov	r0, #0
+ 1068 077e FFF7FEFF 		bl	SRed_Write
+ 1069 0782 0120     		mov	r0, #1
+ 1070 0784 FFF7FEFF 		bl	SGreen_Write
+ 253:.\main.c      ****                 WRed_Write(1);
+ 1071              		.loc 1 253 0
+ 1072 0788 0120     		mov	r0, #1
+ 1073 078a FFF7FEFF 		bl	WRed_Write
+ 254:.\main.c      ****                 ERed_Write(1);
+ 1074              		.loc 1 254 0
+ 1075 078e 0120     		mov	r0, #1
+ 1076 0790 FFF7FEFF 		bl	ERed_Write
+ 255:.\main.c      ****                 EYellow_Write(0), NARed_Write(1);
+ 1077              		.loc 1 255 0
+ 1078 0794 0020     		mov	r0, #0
+ 1079 0796 FFF7FEFF 		bl	EYellow_Write
+ 1080 079a 0120     		mov	r0, #1
+ 1081 079c FFF7FEFF 		bl	NARed_Write
+ 256:.\main.c      ****                 SARed_Write(0), SAGreen_Write(1);
+ 1082              		.loc 1 256 0
+ 1083 07a0 0020     		mov	r0, #0
+ 1084 07a2 FFF7FEFF 		bl	SARed_Write
+ 1085 07a6 0120     		mov	r0, #1
+ 1086 07a8 FFF7FEFF 		bl	SAGreen_Write
+ 257:.\main.c      ****                 if(state2 == 12)
+ 1087              		.loc 1 257 0
+ 1088 07ac 7B68     		ldr	r3, [r7, #4]
+ 1089 07ae 0C2B     		cmp	r3, #12
+ 1090 07b0 02D1     		bne	.L55
+ 258:.\main.c      ****                     state = SSAYellow;
+ 1091              		.loc 1 258 0
+ 1092 07b2 FB1C     		add	r3, r7, #3
+ 1093 07b4 0B22     		mov	r2, #11
+ 1094 07b6 1A70     		strb	r2, [r3]
+ 1095              	.L55:
+ 259:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 1096              		.loc 1 259 0
+ 1097 07b8 FFF7FEFF 		bl	TLCMode_Read
+ 1098 07bc 031C     		mov	r3, r0
+ 1099 07be 002B     		cmp	r3, #0
+ 1100 07c0 09D1     		bne	.L56
+ 1101              		.loc 1 259 0 is_stmt 0 discriminator 1
+ 1102 07c2 FFF7FEFF 		bl	TLCMode1_Read
+ 1103 07c6 031C     		mov	r3, r0
+ 1104 07c8 002B     		cmp	r3, #0
+ 1105 07ca 04D1     		bne	.L56
+ 1106 07cc FFF7FEFF 		bl	TLCMode2_Read
+ 1107 07d0 031C     		mov	r3, r0
+ 1108 07d2 002B     		cmp	r3, #0
+ 1109 07d4 2AD0     		beq	.L57
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 25
+
+
+ 1110              	.L56:
+ 260:.\main.c      ****                     state2 = 0;
+ 1111              		.loc 1 260 0 is_stmt 1
+ 1112 07d6 0023     		mov	r3, #0
+ 1113 07d8 7B60     		str	r3, [r7, #4]
+ 261:.\main.c      ****                     state = NSGreen; 
+ 1114              		.loc 1 261 0
+ 1115 07da FB1C     		add	r3, r7, #3
+ 1116 07dc 0022     		mov	r2, #0
+ 1117 07de 1A70     		strb	r2, [r3]
+ 262:.\main.c      ****                     CyDelay(3000);
+ 1118              		.loc 1 262 0
+ 1119 07e0 644B     		ldr	r3, .L88+4
+ 1120 07e2 181C     		mov	r0, r3
+ 1121 07e4 FFF7FEFF 		bl	CyDelay
+ 263:.\main.c      ****                     SAYellow_Write(1),SAGreen_Write(0);
+ 1122              		.loc 1 263 0
+ 1123 07e8 0120     		mov	r0, #1
+ 1124 07ea FFF7FEFF 		bl	SAYellow_Write
+ 1125 07ee 0020     		mov	r0, #0
+ 1126 07f0 FFF7FEFF 		bl	SAGreen_Write
+ 264:.\main.c      ****                     SYellow_Write(1), SGreen_Write(0);
+ 1127              		.loc 1 264 0
+ 1128 07f4 0120     		mov	r0, #1
+ 1129 07f6 FFF7FEFF 		bl	SYellow_Write
+ 1130 07fa 0020     		mov	r0, #0
+ 1131 07fc FFF7FEFF 		bl	SGreen_Write
+ 265:.\main.c      ****                     CyDelay(3000);
+ 1132              		.loc 1 265 0
+ 1133 0800 5C4B     		ldr	r3, .L88+4
+ 1134 0802 181C     		mov	r0, r3
+ 1135 0804 FFF7FEFF 		bl	CyDelay
+ 266:.\main.c      ****                     SARed_Write(1),SAYellow_Write(0);
+ 1136              		.loc 1 266 0
+ 1137 0808 0120     		mov	r0, #1
+ 1138 080a FFF7FEFF 		bl	SARed_Write
+ 1139 080e 0020     		mov	r0, #0
+ 1140 0810 FFF7FEFF 		bl	SAYellow_Write
+ 267:.\main.c      ****                     SRed_Write(1), SYellow_Write(0);
+ 1141              		.loc 1 267 0
+ 1142 0814 0120     		mov	r0, #1
+ 1143 0816 FFF7FEFF 		bl	SRed_Write
+ 1144 081a 0020     		mov	r0, #0
+ 1145 081c FFF7FEFF 		bl	SYellow_Write
+ 268:.\main.c      ****                     CyDelay(2000);
+ 1146              		.loc 1 268 0
+ 1147 0820 FA23     		mov	r3, #250
+ 1148 0822 DB00     		lsl	r3, r3, #3
+ 1149 0824 181C     		mov	r0, r3
+ 1150 0826 FFF7FEFF 		bl	CyDelay
+ 269:.\main.c      ****                     break;
+ 1151              		.loc 1 269 0
+ 1152 082a AFE0     		b	.L4
+ 1153              	.L57:
+ 270:.\main.c      ****                 }
+ 271:.\main.c      ****                 break;
+ 1154              		.loc 1 271 0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 26
+
+
+ 1155 082c AEE0     		b	.L4
+ 1156              	.L17:
+ 272:.\main.c      ****             case SSAYellow:
+ 273:.\main.c      ****                 CyDelay (6000);
+ 1157              		.loc 1 273 0
+ 1158 082e 524B     		ldr	r3, .L88+8
+ 1159 0830 181C     		mov	r0, r3
+ 1160 0832 FFF7FEFF 		bl	CyDelay
+ 274:.\main.c      ****                 NRed_Write(1);
+ 1161              		.loc 1 274 0
+ 1162 0836 0120     		mov	r0, #1
+ 1163 0838 FFF7FEFF 		bl	NRed_Write
+ 275:.\main.c      ****                 SGreen_Write(1);
+ 1164              		.loc 1 275 0
+ 1165 083c 0120     		mov	r0, #1
+ 1166 083e FFF7FEFF 		bl	SGreen_Write
+ 276:.\main.c      ****                 WRed_Write(1);
+ 1167              		.loc 1 276 0
+ 1168 0842 0120     		mov	r0, #1
+ 1169 0844 FFF7FEFF 		bl	WRed_Write
+ 277:.\main.c      ****                 ERed_Write(1);
+ 1170              		.loc 1 277 0
+ 1171 0848 0120     		mov	r0, #1
+ 1172 084a FFF7FEFF 		bl	ERed_Write
+ 278:.\main.c      ****                 NARed_Write(1);
+ 1173              		.loc 1 278 0
+ 1174 084e 0120     		mov	r0, #1
+ 1175 0850 FFF7FEFF 		bl	NARed_Write
+ 279:.\main.c      ****                 SAGreen_Write(0), SAYellow_Write(1);
+ 1176              		.loc 1 279 0
+ 1177 0854 0020     		mov	r0, #0
+ 1178 0856 FFF7FEFF 		bl	SAGreen_Write
+ 1179 085a 0120     		mov	r0, #1
+ 1180 085c FFF7FEFF 		bl	SAYellow_Write
+ 280:.\main.c      ****                 if(state2 == 13)
+ 1181              		.loc 1 280 0
+ 1182 0860 7B68     		ldr	r3, [r7, #4]
+ 1183 0862 0D2B     		cmp	r3, #13
+ 1184 0864 02D1     		bne	.L58
+ 281:.\main.c      ****                     state = SGreen;
+ 1185              		.loc 1 281 0
+ 1186 0866 FB1C     		add	r3, r7, #3
+ 1187 0868 0C22     		mov	r2, #12
+ 1188 086a 1A70     		strb	r2, [r3]
+ 1189              	.L58:
+ 282:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 1190              		.loc 1 282 0
+ 1191 086c FFF7FEFF 		bl	TLCMode_Read
+ 1192 0870 031C     		mov	r3, r0
+ 1193 0872 002B     		cmp	r3, #0
+ 1194 0874 09D1     		bne	.L59
+ 1195              		.loc 1 282 0 is_stmt 0 discriminator 1
+ 1196 0876 FFF7FEFF 		bl	TLCMode1_Read
+ 1197 087a 031C     		mov	r3, r0
+ 1198 087c 002B     		cmp	r3, #0
+ 1199 087e 04D1     		bne	.L59
+ 1200 0880 FFF7FEFF 		bl	TLCMode2_Read
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 27
+
+
+ 1201 0884 031C     		mov	r3, r0
+ 1202 0886 002B     		cmp	r3, #0
+ 1203 0888 24D0     		beq	.L60
+ 1204              	.L59:
+ 283:.\main.c      ****                     state2 = 0;
+ 1205              		.loc 1 283 0 is_stmt 1
+ 1206 088a 0023     		mov	r3, #0
+ 1207 088c 7B60     		str	r3, [r7, #4]
+ 284:.\main.c      ****                     state = NSGreen; 
+ 1208              		.loc 1 284 0
+ 1209 088e FB1C     		add	r3, r7, #3
+ 1210 0890 0022     		mov	r2, #0
+ 1211 0892 1A70     		strb	r2, [r3]
+ 285:.\main.c      ****                     CyDelay(3000);
+ 1212              		.loc 1 285 0
+ 1213 0894 374B     		ldr	r3, .L88+4
+ 1214 0896 181C     		mov	r0, r3
+ 1215 0898 FFF7FEFF 		bl	CyDelay
+ 286:.\main.c      ****                     SYellow_Write(1), SGreen_Write(0);
+ 1216              		.loc 1 286 0
+ 1217 089c 0120     		mov	r0, #1
+ 1218 089e FFF7FEFF 		bl	SYellow_Write
+ 1219 08a2 0020     		mov	r0, #0
+ 1220 08a4 FFF7FEFF 		bl	SGreen_Write
+ 287:.\main.c      ****                     CyDelay(3000);
+ 1221              		.loc 1 287 0
+ 1222 08a8 324B     		ldr	r3, .L88+4
+ 1223 08aa 181C     		mov	r0, r3
+ 1224 08ac FFF7FEFF 		bl	CyDelay
+ 288:.\main.c      ****                     SARed_Write(1),SAYellow_Write(0);
+ 1225              		.loc 1 288 0
+ 1226 08b0 0120     		mov	r0, #1
+ 1227 08b2 FFF7FEFF 		bl	SARed_Write
+ 1228 08b6 0020     		mov	r0, #0
+ 1229 08b8 FFF7FEFF 		bl	SAYellow_Write
+ 289:.\main.c      ****                     SRed_Write(1), SYellow_Write(0);
+ 1230              		.loc 1 289 0
+ 1231 08bc 0120     		mov	r0, #1
+ 1232 08be FFF7FEFF 		bl	SRed_Write
+ 1233 08c2 0020     		mov	r0, #0
+ 1234 08c4 FFF7FEFF 		bl	SYellow_Write
+ 290:.\main.c      ****                     CyDelay(2000);
+ 1235              		.loc 1 290 0
+ 1236 08c8 FA23     		mov	r3, #250
+ 1237 08ca DB00     		lsl	r3, r3, #3
+ 1238 08cc 181C     		mov	r0, r3
+ 1239 08ce FFF7FEFF 		bl	CyDelay
+ 291:.\main.c      ****                     break;
+ 1240              		.loc 1 291 0
+ 1241 08d2 5BE0     		b	.L4
+ 1242              	.L60:
+ 292:.\main.c      ****                 }
+ 293:.\main.c      ****                 break;   
+ 1243              		.loc 1 293 0
+ 1244 08d4 5AE0     		b	.L4
+ 1245              	.L18:
+ 294:.\main.c      ****             case SGreen:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 28
+
+
+ 295:.\main.c      ****                 CyDelay (3000);
+ 1246              		.loc 1 295 0
+ 1247 08d6 274B     		ldr	r3, .L88+4
+ 1248 08d8 181C     		mov	r0, r3
+ 1249 08da FFF7FEFF 		bl	CyDelay
+ 296:.\main.c      ****                 NRed_Write(1);
+ 1250              		.loc 1 296 0
+ 1251 08de 0120     		mov	r0, #1
+ 1252 08e0 FFF7FEFF 		bl	NRed_Write
+ 297:.\main.c      ****                 SGreen_Write(1);
+ 1253              		.loc 1 297 0
+ 1254 08e4 0120     		mov	r0, #1
+ 1255 08e6 FFF7FEFF 		bl	SGreen_Write
+ 298:.\main.c      ****                 WRed_Write(1);
+ 1256              		.loc 1 298 0
+ 1257 08ea 0120     		mov	r0, #1
+ 1258 08ec FFF7FEFF 		bl	WRed_Write
+ 299:.\main.c      ****                 ERed_Write(1);
+ 1259              		.loc 1 299 0
+ 1260 08f0 0120     		mov	r0, #1
+ 1261 08f2 FFF7FEFF 		bl	ERed_Write
+ 300:.\main.c      ****                 NARed_Write(1);
+ 1262              		.loc 1 300 0
+ 1263 08f6 0120     		mov	r0, #1
+ 1264 08f8 FFF7FEFF 		bl	NARed_Write
+ 301:.\main.c      ****                 SAYellow_Write(0),SARed_Write(1);
+ 1265              		.loc 1 301 0
+ 1266 08fc 0020     		mov	r0, #0
+ 1267 08fe FFF7FEFF 		bl	SAYellow_Write
+ 1268 0902 0120     		mov	r0, #1
+ 1269 0904 FFF7FEFF 		bl	SARed_Write
+ 302:.\main.c      ****                 if(state2 == 14)
+ 1270              		.loc 1 302 0
+ 1271 0908 7B68     		ldr	r3, [r7, #4]
+ 1272 090a 0E2B     		cmp	r3, #14
+ 1273 090c 02D1     		bne	.L61
+ 303:.\main.c      ****                     state = NSGreen;
+ 1274              		.loc 1 303 0
+ 1275 090e FB1C     		add	r3, r7, #3
+ 1276 0910 0022     		mov	r2, #0
+ 1277 0912 1A70     		strb	r2, [r3]
+ 1278              	.L61:
+ 304:.\main.c      ****                 if((TLCMode_Read()) || (TLCMode1_Read()) || (TLCMode2_Read())){
+ 1279              		.loc 1 304 0
+ 1280 0914 FFF7FEFF 		bl	TLCMode_Read
+ 1281 0918 031C     		mov	r3, r0
+ 1282 091a 002B     		cmp	r3, #0
+ 1283 091c 09D1     		bne	.L62
+ 1284              		.loc 1 304 0 is_stmt 0 discriminator 1
+ 1285 091e FFF7FEFF 		bl	TLCMode1_Read
+ 1286 0922 031C     		mov	r3, r0
+ 1287 0924 002B     		cmp	r3, #0
+ 1288 0926 04D1     		bne	.L62
+ 1289 0928 FFF7FEFF 		bl	TLCMode2_Read
+ 1290 092c 031C     		mov	r3, r0
+ 1291 092e 002B     		cmp	r3, #0
+ 1292 0930 26D0     		beq	.L63
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 29
+
+
+ 1293              	.L62:
+ 305:.\main.c      ****                     state2 = 0;
+ 1294              		.loc 1 305 0 is_stmt 1
+ 1295 0932 0023     		mov	r3, #0
+ 1296 0934 7B60     		str	r3, [r7, #4]
+ 306:.\main.c      ****                     state = NSGreen; 
+ 1297              		.loc 1 306 0
+ 1298 0936 FB1C     		add	r3, r7, #3
+ 1299 0938 0022     		mov	r2, #0
+ 1300 093a 1A70     		strb	r2, [r3]
+ 307:.\main.c      ****                     CyDelay(3000);
+ 1301              		.loc 1 307 0
+ 1302 093c 0D4B     		ldr	r3, .L88+4
+ 1303 093e 181C     		mov	r0, r3
+ 1304 0940 FFF7FEFF 		bl	CyDelay
+ 308:.\main.c      ****                     SYellow_Write(1), SGreen_Write(0);
+ 1305              		.loc 1 308 0
+ 1306 0944 0120     		mov	r0, #1
+ 1307 0946 FFF7FEFF 		bl	SYellow_Write
+ 1308 094a 0020     		mov	r0, #0
+ 1309 094c FFF7FEFF 		bl	SGreen_Write
+ 309:.\main.c      ****                     CyDelay(3000);
+ 1310              		.loc 1 309 0
+ 1311 0950 084B     		ldr	r3, .L88+4
+ 1312 0952 181C     		mov	r0, r3
+ 1313 0954 FFF7FEFF 		bl	CyDelay
+ 310:.\main.c      ****                     SRed_Write(1), SYellow_Write(0);
+ 1314              		.loc 1 310 0
+ 1315 0958 0120     		mov	r0, #1
+ 1316 095a FFF7FEFF 		bl	SRed_Write
+ 1317 095e 0020     		mov	r0, #0
+ 1318 0960 FFF7FEFF 		bl	SYellow_Write
+ 311:.\main.c      ****                     CyDelay(1500);
+ 1319              		.loc 1 311 0
+ 1320 0964 054B     		ldr	r3, .L88+12
+ 1321 0966 181C     		mov	r0, r3
+ 1322 0968 FFF7FEFF 		bl	CyDelay
+ 312:.\main.c      ****                     break;
+ 1323              		.loc 1 312 0
+ 1324 096c 0EE0     		b	.L4
+ 1325              	.L89:
+ 1326 096e C046     		.align	2
+ 1327              	.L88:
+ 1328 0970 C4090000 		.word	2500
+ 1329 0974 B80B0000 		.word	3000
+ 1330 0978 70170000 		.word	6000
+ 1331 097c DC050000 		.word	1500
+ 1332              	.L63:
+ 313:.\main.c      ****                 }
+ 314:.\main.c      ****                 CyDelay(1000);
+ 1333              		.loc 1 314 0
+ 1334 0980 FA23     		mov	r3, #250
+ 1335 0982 9B00     		lsl	r3, r3, #2
+ 1336 0984 181C     		mov	r0, r3
+ 1337 0986 FFF7FEFF 		bl	CyDelay
+ 315:.\main.c      ****                 break;   
+ 1338              		.loc 1 315 0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 30
+
+
+ 1339 098a C046     		mov	r8, r8
+ 1340              	.L4:
+ 316:.\main.c      ****         }
+ 317:.\main.c      ****     state2++;
+ 1341              		.loc 1 317 0
+ 1342 098c 7B68     		ldr	r3, [r7, #4]
+ 1343 098e 0133     		add	r3, r3, #1
+ 1344 0990 7B60     		str	r3, [r7, #4]
+ 1345              	.L2:
+ 318:.\main.c      ****     
+ 319:.\main.c      ****     } if ((TLCMode_Read())&&(!TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1346              		.loc 1 319 0
+ 1347 0992 FFF7FEFF 		bl	TLCMode_Read
+ 1348 0996 031C     		mov	r3, r0
+ 1349 0998 002B     		cmp	r3, #0
+ 1350 099a 00D1     		bne	.LCB1095
+ 1351 099c A5E0     		b	.L64	@long jump
+ 1352              	.LCB1095:
+ 1353              		.loc 1 319 0 is_stmt 0 discriminator 1
+ 1354 099e FFF7FEFF 		bl	TLCMode1_Read
+ 1355 09a2 031C     		mov	r3, r0
+ 1356 09a4 002B     		cmp	r3, #0
+ 1357 09a6 00D0     		beq	.LCB1099
+ 1358 09a8 9FE0     		b	.L64	@long jump
+ 1359              	.LCB1099:
+ 1360 09aa FFF7FEFF 		bl	TLCMode2_Read
+ 1361 09ae 031C     		mov	r3, r0
+ 1362 09b0 002B     		cmp	r3, #0
+ 1363 09b2 00D0     		beq	.LCB1103
+ 1364 09b4 99E0     		b	.L64	@long jump
+ 1365              	.LCB1103:
+ 320:.\main.c      ****                                                 
+ 321:.\main.c      ****         if((!TLCMode_Read()) || (TLCMode1_Read())||(TLCMode2_Read()))
+ 1366              		.loc 1 321 0 is_stmt 1
+ 1367 09b6 FFF7FEFF 		bl	TLCMode_Read
+ 1368 09ba 031C     		mov	r3, r0
+ 1369 09bc 002B     		cmp	r3, #0
+ 1370 09be 09D0     		beq	.L65
+ 1371              		.loc 1 321 0 is_stmt 0 discriminator 1
+ 1372 09c0 FFF7FEFF 		bl	TLCMode1_Read
+ 1373 09c4 031C     		mov	r3, r0
+ 1374 09c6 002B     		cmp	r3, #0
+ 1375 09c8 04D1     		bne	.L65
+ 1376 09ca FFF7FEFF 		bl	TLCMode2_Read
+ 1377 09ce 031C     		mov	r3, r0
+ 1378 09d0 002B     		cmp	r3, #0
+ 1379 09d2 39D0     		beq	.L66
+ 1380              	.L65:
+ 322:.\main.c      ****         {
+ 323:.\main.c      ****             NYellow_Write(1);
+ 1381              		.loc 1 323 0 is_stmt 1
+ 1382 09d4 0120     		mov	r0, #1
+ 1383 09d6 FFF7FEFF 		bl	NYellow_Write
+ 324:.\main.c      ****             SYellow_Write(1);
+ 1384              		.loc 1 324 0
+ 1385 09da 0120     		mov	r0, #1
+ 1386 09dc FFF7FEFF 		bl	SYellow_Write
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 31
+
+
+ 325:.\main.c      ****             WYellow_Write(1);
+ 1387              		.loc 1 325 0
+ 1388 09e0 0120     		mov	r0, #1
+ 1389 09e2 FFF7FEFF 		bl	WYellow_Write
+ 326:.\main.c      ****             EYellow_Write(1);
+ 1390              		.loc 1 326 0
+ 1391 09e6 0120     		mov	r0, #1
+ 1392 09e8 FFF7FEFF 		bl	EYellow_Write
+ 327:.\main.c      ****             NAYellow_Write(1);
+ 1393              		.loc 1 327 0
+ 1394 09ec 0120     		mov	r0, #1
+ 1395 09ee FFF7FEFF 		bl	NAYellow_Write
+ 328:.\main.c      ****             SAYellow_Write(1);
+ 1396              		.loc 1 328 0
+ 1397 09f2 0120     		mov	r0, #1
+ 1398 09f4 FFF7FEFF 		bl	SAYellow_Write
+ 329:.\main.c      ****             CyDelay(3000);
+ 1399              		.loc 1 329 0
+ 1400 09f8 BE4B     		ldr	r3, .L90
+ 1401 09fa 181C     		mov	r0, r3
+ 1402 09fc FFF7FEFF 		bl	CyDelay
+ 330:.\main.c      ****             NRed_Write(1),NYellow_Write(0);
+ 1403              		.loc 1 330 0
+ 1404 0a00 0120     		mov	r0, #1
+ 1405 0a02 FFF7FEFF 		bl	NRed_Write
+ 1406 0a06 0020     		mov	r0, #0
+ 1407 0a08 FFF7FEFF 		bl	NYellow_Write
+ 331:.\main.c      ****             SRed_Write(1), SYellow_Write(0);
+ 1408              		.loc 1 331 0
+ 1409 0a0c 0120     		mov	r0, #1
+ 1410 0a0e FFF7FEFF 		bl	SRed_Write
+ 1411 0a12 0020     		mov	r0, #0
+ 1412 0a14 FFF7FEFF 		bl	SYellow_Write
+ 332:.\main.c      ****             WRed_Write(1), WYellow_Write(0);
+ 1413              		.loc 1 332 0
+ 1414 0a18 0120     		mov	r0, #1
+ 1415 0a1a FFF7FEFF 		bl	WRed_Write
+ 1416 0a1e 0020     		mov	r0, #0
+ 1417 0a20 FFF7FEFF 		bl	WYellow_Write
+ 333:.\main.c      ****             ERed_Write(1), EYellow_Write(0);
+ 1418              		.loc 1 333 0
+ 1419 0a24 0120     		mov	r0, #1
+ 1420 0a26 FFF7FEFF 		bl	ERed_Write
+ 1421 0a2a 0020     		mov	r0, #0
+ 1422 0a2c FFF7FEFF 		bl	EYellow_Write
+ 334:.\main.c      ****             NARed_Write(1), NAYellow_Write(0);
+ 1423              		.loc 1 334 0
+ 1424 0a30 0120     		mov	r0, #1
+ 1425 0a32 FFF7FEFF 		bl	NARed_Write
+ 1426 0a36 0020     		mov	r0, #0
+ 1427 0a38 FFF7FEFF 		bl	NAYellow_Write
+ 335:.\main.c      ****             SARed_Write(1), SAYellow_Write(0);
+ 1428              		.loc 1 335 0
+ 1429 0a3c 0120     		mov	r0, #1
+ 1430 0a3e FFF7FEFF 		bl	SARed_Write
+ 1431 0a42 0020     		mov	r0, #0
+ 1432 0a44 FFF7FEFF 		bl	SAYellow_Write
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 32
+
+
+ 1433              	.L66:
+ 336:.\main.c      ****            }
+ 337:.\main.c      ****         NGreen_Write(0), NYellow_Write(1), NRed_Write(0);
+ 1434              		.loc 1 337 0
+ 1435 0a48 0020     		mov	r0, #0
+ 1436 0a4a FFF7FEFF 		bl	NGreen_Write
+ 1437 0a4e 0120     		mov	r0, #1
+ 1438 0a50 FFF7FEFF 		bl	NYellow_Write
+ 1439 0a54 0020     		mov	r0, #0
+ 1440 0a56 FFF7FEFF 		bl	NRed_Write
+ 338:.\main.c      ****         SGreen_Write(0), SYellow_Write(1), SRed_Write(0);
+ 1441              		.loc 1 338 0
+ 1442 0a5a 0020     		mov	r0, #0
+ 1443 0a5c FFF7FEFF 		bl	SGreen_Write
+ 1444 0a60 0120     		mov	r0, #1
+ 1445 0a62 FFF7FEFF 		bl	SYellow_Write
+ 1446 0a66 0020     		mov	r0, #0
+ 1447 0a68 FFF7FEFF 		bl	SRed_Write
+ 339:.\main.c      ****         WGreen_Write(0), WYellow_Write(0), WRed_Write(1);
+ 1448              		.loc 1 339 0
+ 1449 0a6c 0020     		mov	r0, #0
+ 1450 0a6e FFF7FEFF 		bl	WGreen_Write
+ 1451 0a72 0020     		mov	r0, #0
+ 1452 0a74 FFF7FEFF 		bl	WYellow_Write
+ 1453 0a78 0120     		mov	r0, #1
+ 1454 0a7a FFF7FEFF 		bl	WRed_Write
+ 340:.\main.c      ****         EGreen_Write(0), EYellow_Write(0), ERed_Write(1);
+ 1455              		.loc 1 340 0
+ 1456 0a7e 0020     		mov	r0, #0
+ 1457 0a80 FFF7FEFF 		bl	EGreen_Write
+ 1458 0a84 0020     		mov	r0, #0
+ 1459 0a86 FFF7FEFF 		bl	EYellow_Write
+ 1460 0a8a 0120     		mov	r0, #1
+ 1461 0a8c FFF7FEFF 		bl	ERed_Write
+ 341:.\main.c      ****         NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 1462              		.loc 1 341 0
+ 1463 0a90 0020     		mov	r0, #0
+ 1464 0a92 FFF7FEFF 		bl	NAGreen_Write
+ 1465 0a96 0020     		mov	r0, #0
+ 1466 0a98 FFF7FEFF 		bl	NAYellow_Write
+ 1467 0a9c 0120     		mov	r0, #1
+ 1468 0a9e FFF7FEFF 		bl	NARed_Write
+ 342:.\main.c      ****         SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 1469              		.loc 1 342 0
+ 1470 0aa2 0020     		mov	r0, #0
+ 1471 0aa4 FFF7FEFF 		bl	SAGreen_Write
+ 1472 0aa8 0020     		mov	r0, #0
+ 1473 0aaa FFF7FEFF 		bl	SAYellow_Write
+ 1474 0aae 0120     		mov	r0, #1
+ 1475 0ab0 FFF7FEFF 		bl	SARed_Write
+ 343:.\main.c      ****         CyDelay(1500);
+ 1476              		.loc 1 343 0
+ 1477 0ab4 904B     		ldr	r3, .L90+4
+ 1478 0ab6 181C     		mov	r0, r3
+ 1479 0ab8 FFF7FEFF 		bl	CyDelay
+ 344:.\main.c      ****         NYellow_Write(0);
+ 1480              		.loc 1 344 0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 33
+
+
+ 1481 0abc 0020     		mov	r0, #0
+ 1482 0abe FFF7FEFF 		bl	NYellow_Write
+ 345:.\main.c      ****         SYellow_Write(0);
+ 1483              		.loc 1 345 0
+ 1484 0ac2 0020     		mov	r0, #0
+ 1485 0ac4 FFF7FEFF 		bl	SYellow_Write
+ 346:.\main.c      ****         WRed_Write(0);
+ 1486              		.loc 1 346 0
+ 1487 0ac8 0020     		mov	r0, #0
+ 1488 0aca FFF7FEFF 		bl	WRed_Write
+ 347:.\main.c      ****         ERed_Write(0);
+ 1489              		.loc 1 347 0
+ 1490 0ace 0020     		mov	r0, #0
+ 1491 0ad0 FFF7FEFF 		bl	ERed_Write
+ 348:.\main.c      ****         NARed_Write(0);
+ 1492              		.loc 1 348 0
+ 1493 0ad4 0020     		mov	r0, #0
+ 1494 0ad6 FFF7FEFF 		bl	NARed_Write
+ 349:.\main.c      ****         SARed_Write(0);
+ 1495              		.loc 1 349 0
+ 1496 0ada 0020     		mov	r0, #0
+ 1497 0adc FFF7FEFF 		bl	SARed_Write
+ 350:.\main.c      ****         
+ 351:.\main.c      ****          CyDelay(1000);
+ 1498              		.loc 1 351 0
+ 1499 0ae0 FA23     		mov	r3, #250
+ 1500 0ae2 9B00     		lsl	r3, r3, #2
+ 1501 0ae4 181C     		mov	r0, r3
+ 1502 0ae6 FFF7FEFF 		bl	CyDelay
+ 1503              	.L64:
+ 352:.\main.c      ****                 
+ 353:.\main.c      ****     }if ((!TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){         //EMERGENCY NORTH
+ 1504              		.loc 1 353 0
+ 1505 0aea FFF7FEFF 		bl	TLCMode_Read
+ 1506 0aee 031C     		mov	r3, r0
+ 1507 0af0 002B     		cmp	r3, #0
+ 1508 0af2 00D0     		beq	.LCB1218
+ 1509 0af4 72E0     		b	.L67	@long jump
+ 1510              	.LCB1218:
+ 1511              		.loc 1 353 0 is_stmt 0 discriminator 1
+ 1512 0af6 FFF7FEFF 		bl	TLCMode1_Read
+ 1513 0afa 031C     		mov	r3, r0
+ 1514 0afc 002B     		cmp	r3, #0
+ 1515 0afe 6DD0     		beq	.L67
+ 1516 0b00 FFF7FEFF 		bl	TLCMode2_Read
+ 1517 0b04 031C     		mov	r3, r0
+ 1518 0b06 002B     		cmp	r3, #0
+ 1519 0b08 68D1     		bne	.L67
+ 354:.\main.c      ****         while((!TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1520              		.loc 1 354 0 is_stmt 1
+ 1521 0b0a 58E0     		b	.L68
+ 1522              	.L70:
+ 355:.\main.c      ****             NGreen_Write(1), NYellow_Write(0), NRed_Write(0);
+ 1523              		.loc 1 355 0
+ 1524 0b0c 0120     		mov	r0, #1
+ 1525 0b0e FFF7FEFF 		bl	NGreen_Write
+ 1526 0b12 0020     		mov	r0, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 34
+
+
+ 1527 0b14 FFF7FEFF 		bl	NYellow_Write
+ 1528 0b18 0020     		mov	r0, #0
+ 1529 0b1a FFF7FEFF 		bl	NRed_Write
+ 356:.\main.c      ****             SGreen_Write(0), SYellow_Write(0), SRed_Write(1);
+ 1530              		.loc 1 356 0
+ 1531 0b1e 0020     		mov	r0, #0
+ 1532 0b20 FFF7FEFF 		bl	SGreen_Write
+ 1533 0b24 0020     		mov	r0, #0
+ 1534 0b26 FFF7FEFF 		bl	SYellow_Write
+ 1535 0b2a 0120     		mov	r0, #1
+ 1536 0b2c FFF7FEFF 		bl	SRed_Write
+ 357:.\main.c      ****             WGreen_Write(0), WYellow_Write(0), WRed_Write(1);
+ 1537              		.loc 1 357 0
+ 1538 0b30 0020     		mov	r0, #0
+ 1539 0b32 FFF7FEFF 		bl	WGreen_Write
+ 1540 0b36 0020     		mov	r0, #0
+ 1541 0b38 FFF7FEFF 		bl	WYellow_Write
+ 1542 0b3c 0120     		mov	r0, #1
+ 1543 0b3e FFF7FEFF 		bl	WRed_Write
+ 358:.\main.c      ****             EGreen_Write(0), EYellow_Write(0), ERed_Write(1);
+ 1544              		.loc 1 358 0
+ 1545 0b42 0020     		mov	r0, #0
+ 1546 0b44 FFF7FEFF 		bl	EGreen_Write
+ 1547 0b48 0020     		mov	r0, #0
+ 1548 0b4a FFF7FEFF 		bl	EYellow_Write
+ 1549 0b4e 0120     		mov	r0, #1
+ 1550 0b50 FFF7FEFF 		bl	ERed_Write
+ 359:.\main.c      ****             NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 1551              		.loc 1 359 0
+ 1552 0b54 0020     		mov	r0, #0
+ 1553 0b56 FFF7FEFF 		bl	NAGreen_Write
+ 1554 0b5a 0020     		mov	r0, #0
+ 1555 0b5c FFF7FEFF 		bl	NAYellow_Write
+ 1556 0b60 0120     		mov	r0, #1
+ 1557 0b62 FFF7FEFF 		bl	NARed_Write
+ 360:.\main.c      ****             SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 1558              		.loc 1 360 0
+ 1559 0b66 0020     		mov	r0, #0
+ 1560 0b68 FFF7FEFF 		bl	SAGreen_Write
+ 1561 0b6c 0020     		mov	r0, #0
+ 1562 0b6e FFF7FEFF 		bl	SAYellow_Write
+ 1563 0b72 0120     		mov	r0, #1
+ 1564 0b74 FFF7FEFF 		bl	SARed_Write
+ 361:.\main.c      ****             if((TLCMode_Read())||(!TLCMode1_Read())||(TLCMode2_Read())){
+ 1565              		.loc 1 361 0
+ 1566 0b78 FFF7FEFF 		bl	TLCMode_Read
+ 1567 0b7c 031C     		mov	r3, r0
+ 1568 0b7e 002B     		cmp	r3, #0
+ 1569 0b80 09D1     		bne	.L69
+ 1570              		.loc 1 361 0 is_stmt 0 discriminator 1
+ 1571 0b82 FFF7FEFF 		bl	TLCMode1_Read
+ 1572 0b86 031C     		mov	r3, r0
+ 1573 0b88 002B     		cmp	r3, #0
+ 1574 0b8a 04D0     		beq	.L69
+ 1575 0b8c FFF7FEFF 		bl	TLCMode2_Read
+ 1576 0b90 031C     		mov	r3, r0
+ 1577 0b92 002B     		cmp	r3, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 35
+
+
+ 1578 0b94 13D0     		beq	.L68
+ 1579              	.L69:
+ 362:.\main.c      ****                 NGreen_Write(0), NYellow_Write(1);
+ 1580              		.loc 1 362 0 is_stmt 1
+ 1581 0b96 0020     		mov	r0, #0
+ 1582 0b98 FFF7FEFF 		bl	NGreen_Write
+ 1583 0b9c 0120     		mov	r0, #1
+ 1584 0b9e FFF7FEFF 		bl	NYellow_Write
+ 363:.\main.c      ****                 CyDelay(2500);
+ 1585              		.loc 1 363 0
+ 1586 0ba2 564B     		ldr	r3, .L90+8
+ 1587 0ba4 181C     		mov	r0, r3
+ 1588 0ba6 FFF7FEFF 		bl	CyDelay
+ 364:.\main.c      ****                 NYellow_Write(0), NRed_Write(1);
+ 1589              		.loc 1 364 0
+ 1590 0baa 0020     		mov	r0, #0
+ 1591 0bac FFF7FEFF 		bl	NYellow_Write
+ 1592 0bb0 0120     		mov	r0, #1
+ 1593 0bb2 FFF7FEFF 		bl	NRed_Write
+ 365:.\main.c      ****                 CyDelay(2500);
+ 1594              		.loc 1 365 0
+ 1595 0bb6 514B     		ldr	r3, .L90+8
+ 1596 0bb8 181C     		mov	r0, r3
+ 1597 0bba FFF7FEFF 		bl	CyDelay
+ 1598              	.L68:
+ 354:.\main.c      ****         while((!TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1599              		.loc 1 354 0 discriminator 1
+ 1600 0bbe FFF7FEFF 		bl	TLCMode_Read
+ 1601 0bc2 031C     		mov	r3, r0
+ 1602 0bc4 002B     		cmp	r3, #0
+ 1603 0bc6 09D1     		bne	.L67
+ 354:.\main.c      ****         while((!TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1604              		.loc 1 354 0 is_stmt 0 discriminator 2
+ 1605 0bc8 FFF7FEFF 		bl	TLCMode1_Read
+ 1606 0bcc 031C     		mov	r3, r0
+ 1607 0bce 002B     		cmp	r3, #0
+ 1608 0bd0 04D0     		beq	.L67
+ 354:.\main.c      ****         while((!TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1609              		.loc 1 354 0 discriminator 1
+ 1610 0bd2 FFF7FEFF 		bl	TLCMode2_Read
+ 1611 0bd6 031C     		mov	r3, r0
+ 1612 0bd8 002B     		cmp	r3, #0
+ 1613 0bda 97D0     		beq	.L70
+ 1614              	.L67:
+ 366:.\main.c      ****             }
+ 367:.\main.c      ****         }
+ 368:.\main.c      ****     
+ 369:.\main.c      ****     }if ((TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){         //EMERGENCY SOUTH
+ 1615              		.loc 1 369 0 is_stmt 1
+ 1616 0bdc FFF7FEFF 		bl	TLCMode_Read
+ 1617 0be0 031C     		mov	r3, r0
+ 1618 0be2 002B     		cmp	r3, #0
+ 1619 0be4 00D1     		bne	.LCB1312
+ 1620 0be6 72E0     		b	.L71	@long jump
+ 1621              	.LCB1312:
+ 1622              		.loc 1 369 0 is_stmt 0 discriminator 1
+ 1623 0be8 FFF7FEFF 		bl	TLCMode1_Read
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 36
+
+
+ 1624 0bec 031C     		mov	r3, r0
+ 1625 0bee 002B     		cmp	r3, #0
+ 1626 0bf0 6DD0     		beq	.L71
+ 1627 0bf2 FFF7FEFF 		bl	TLCMode2_Read
+ 1628 0bf6 031C     		mov	r3, r0
+ 1629 0bf8 002B     		cmp	r3, #0
+ 1630 0bfa 68D1     		bne	.L71
+ 370:.\main.c      ****         while((TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1631              		.loc 1 370 0 is_stmt 1
+ 1632 0bfc 58E0     		b	.L72
+ 1633              	.L74:
+ 371:.\main.c      ****             NGreen_Write(0), NYellow_Write(0), NRed_Write(1);
+ 1634              		.loc 1 371 0
+ 1635 0bfe 0020     		mov	r0, #0
+ 1636 0c00 FFF7FEFF 		bl	NGreen_Write
+ 1637 0c04 0020     		mov	r0, #0
+ 1638 0c06 FFF7FEFF 		bl	NYellow_Write
+ 1639 0c0a 0120     		mov	r0, #1
+ 1640 0c0c FFF7FEFF 		bl	NRed_Write
+ 372:.\main.c      ****             SGreen_Write(1), SYellow_Write(0), SRed_Write(0);
+ 1641              		.loc 1 372 0
+ 1642 0c10 0120     		mov	r0, #1
+ 1643 0c12 FFF7FEFF 		bl	SGreen_Write
+ 1644 0c16 0020     		mov	r0, #0
+ 1645 0c18 FFF7FEFF 		bl	SYellow_Write
+ 1646 0c1c 0020     		mov	r0, #0
+ 1647 0c1e FFF7FEFF 		bl	SRed_Write
+ 373:.\main.c      ****             WGreen_Write(0), WYellow_Write(0), WRed_Write(1);
+ 1648              		.loc 1 373 0
+ 1649 0c22 0020     		mov	r0, #0
+ 1650 0c24 FFF7FEFF 		bl	WGreen_Write
+ 1651 0c28 0020     		mov	r0, #0
+ 1652 0c2a FFF7FEFF 		bl	WYellow_Write
+ 1653 0c2e 0120     		mov	r0, #1
+ 1654 0c30 FFF7FEFF 		bl	WRed_Write
+ 374:.\main.c      ****             EGreen_Write(0), EYellow_Write(0), ERed_Write(1);
+ 1655              		.loc 1 374 0
+ 1656 0c34 0020     		mov	r0, #0
+ 1657 0c36 FFF7FEFF 		bl	EGreen_Write
+ 1658 0c3a 0020     		mov	r0, #0
+ 1659 0c3c FFF7FEFF 		bl	EYellow_Write
+ 1660 0c40 0120     		mov	r0, #1
+ 1661 0c42 FFF7FEFF 		bl	ERed_Write
+ 375:.\main.c      ****             NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 1662              		.loc 1 375 0
+ 1663 0c46 0020     		mov	r0, #0
+ 1664 0c48 FFF7FEFF 		bl	NAGreen_Write
+ 1665 0c4c 0020     		mov	r0, #0
+ 1666 0c4e FFF7FEFF 		bl	NAYellow_Write
+ 1667 0c52 0120     		mov	r0, #1
+ 1668 0c54 FFF7FEFF 		bl	NARed_Write
+ 376:.\main.c      ****             SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 1669              		.loc 1 376 0
+ 1670 0c58 0020     		mov	r0, #0
+ 1671 0c5a FFF7FEFF 		bl	SAGreen_Write
+ 1672 0c5e 0020     		mov	r0, #0
+ 1673 0c60 FFF7FEFF 		bl	SAYellow_Write
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 37
+
+
+ 1674 0c64 0120     		mov	r0, #1
+ 1675 0c66 FFF7FEFF 		bl	SARed_Write
+ 377:.\main.c      ****             if((!TLCMode_Read())||(!TLCMode1_Read())||(TLCMode2_Read())){
+ 1676              		.loc 1 377 0
+ 1677 0c6a FFF7FEFF 		bl	TLCMode_Read
+ 1678 0c6e 031C     		mov	r3, r0
+ 1679 0c70 002B     		cmp	r3, #0
+ 1680 0c72 09D0     		beq	.L73
+ 1681              		.loc 1 377 0 is_stmt 0 discriminator 1
+ 1682 0c74 FFF7FEFF 		bl	TLCMode1_Read
+ 1683 0c78 031C     		mov	r3, r0
+ 1684 0c7a 002B     		cmp	r3, #0
+ 1685 0c7c 04D0     		beq	.L73
+ 1686 0c7e FFF7FEFF 		bl	TLCMode2_Read
+ 1687 0c82 031C     		mov	r3, r0
+ 1688 0c84 002B     		cmp	r3, #0
+ 1689 0c86 13D0     		beq	.L72
+ 1690              	.L73:
+ 378:.\main.c      ****                 SGreen_Write(0), SYellow_Write(1);
+ 1691              		.loc 1 378 0 is_stmt 1
+ 1692 0c88 0020     		mov	r0, #0
+ 1693 0c8a FFF7FEFF 		bl	SGreen_Write
+ 1694 0c8e 0120     		mov	r0, #1
+ 1695 0c90 FFF7FEFF 		bl	SYellow_Write
+ 379:.\main.c      ****                 CyDelay(2500);
+ 1696              		.loc 1 379 0
+ 1697 0c94 194B     		ldr	r3, .L90+8
+ 1698 0c96 181C     		mov	r0, r3
+ 1699 0c98 FFF7FEFF 		bl	CyDelay
+ 380:.\main.c      ****                 SYellow_Write(0), SRed_Write(1);
+ 1700              		.loc 1 380 0
+ 1701 0c9c 0020     		mov	r0, #0
+ 1702 0c9e FFF7FEFF 		bl	SYellow_Write
+ 1703 0ca2 0120     		mov	r0, #1
+ 1704 0ca4 FFF7FEFF 		bl	SRed_Write
+ 381:.\main.c      ****                 CyDelay(2500);
+ 1705              		.loc 1 381 0
+ 1706 0ca8 144B     		ldr	r3, .L90+8
+ 1707 0caa 181C     		mov	r0, r3
+ 1708 0cac FFF7FEFF 		bl	CyDelay
+ 1709              	.L72:
+ 370:.\main.c      ****         while((TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1710              		.loc 1 370 0 discriminator 1
+ 1711 0cb0 FFF7FEFF 		bl	TLCMode_Read
+ 1712 0cb4 031C     		mov	r3, r0
+ 1713 0cb6 002B     		cmp	r3, #0
+ 1714 0cb8 09D0     		beq	.L71
+ 370:.\main.c      ****         while((TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1715              		.loc 1 370 0 is_stmt 0 discriminator 2
+ 1716 0cba FFF7FEFF 		bl	TLCMode1_Read
+ 1717 0cbe 031C     		mov	r3, r0
+ 1718 0cc0 002B     		cmp	r3, #0
+ 1719 0cc2 04D0     		beq	.L71
+ 370:.\main.c      ****         while((TLCMode_Read())&&(TLCMode1_Read())&&(!TLCMode2_Read())){
+ 1720              		.loc 1 370 0 discriminator 1
+ 1721 0cc4 FFF7FEFF 		bl	TLCMode2_Read
+ 1722 0cc8 031C     		mov	r3, r0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 38
+
+
+ 1723 0cca 002B     		cmp	r3, #0
+ 1724 0ccc 97D0     		beq	.L74
+ 1725              	.L71:
+ 382:.\main.c      ****             }
+ 383:.\main.c      ****         }
+ 384:.\main.c      ****     }if ((!TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){         //EMERGENCY WEST
+ 1726              		.loc 1 384 0 is_stmt 1
+ 1727 0cce FFF7FEFF 		bl	TLCMode_Read
+ 1728 0cd2 031C     		mov	r3, r0
+ 1729 0cd4 002B     		cmp	r3, #0
+ 1730 0cd6 00D0     		beq	.LCB1406
+ 1731 0cd8 7AE0     		b	.L75	@long jump
+ 1732              	.LCB1406:
+ 1733              		.loc 1 384 0 is_stmt 0 discriminator 1
+ 1734 0cda FFF7FEFF 		bl	TLCMode1_Read
+ 1735 0cde 031C     		mov	r3, r0
+ 1736 0ce0 002B     		cmp	r3, #0
+ 1737 0ce2 00D0     		beq	.LCB1410
+ 1738 0ce4 74E0     		b	.L75	@long jump
+ 1739              	.LCB1410:
+ 1740 0ce6 FFF7FEFF 		bl	TLCMode2_Read
+ 1741 0cea 031C     		mov	r3, r0
+ 1742 0cec 002B     		cmp	r3, #0
+ 1743 0cee 6FD0     		beq	.L75
+ 385:.\main.c      ****         while((!TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1744              		.loc 1 385 0 is_stmt 1
+ 1745 0cf0 5FE0     		b	.L76
+ 1746              	.L91:
+ 1747 0cf2 C046     		.align	2
+ 1748              	.L90:
+ 1749 0cf4 B80B0000 		.word	3000
+ 1750 0cf8 DC050000 		.word	1500
+ 1751 0cfc C4090000 		.word	2500
+ 1752              	.L78:
+ 386:.\main.c      ****             NGreen_Write(0), NYellow_Write(0), NRed_Write(1);
+ 1753              		.loc 1 386 0
+ 1754 0d00 0020     		mov	r0, #0
+ 1755 0d02 FFF7FEFF 		bl	NGreen_Write
+ 1756 0d06 0020     		mov	r0, #0
+ 1757 0d08 FFF7FEFF 		bl	NYellow_Write
+ 1758 0d0c 0120     		mov	r0, #1
+ 1759 0d0e FFF7FEFF 		bl	NRed_Write
+ 387:.\main.c      ****             SGreen_Write(0), SYellow_Write(0), SRed_Write(1);
+ 1760              		.loc 1 387 0
+ 1761 0d12 0020     		mov	r0, #0
+ 1762 0d14 FFF7FEFF 		bl	SGreen_Write
+ 1763 0d18 0020     		mov	r0, #0
+ 1764 0d1a FFF7FEFF 		bl	SYellow_Write
+ 1765 0d1e 0120     		mov	r0, #1
+ 1766 0d20 FFF7FEFF 		bl	SRed_Write
+ 388:.\main.c      ****             WGreen_Write(1), WYellow_Write(0), WRed_Write(0);
+ 1767              		.loc 1 388 0
+ 1768 0d24 0120     		mov	r0, #1
+ 1769 0d26 FFF7FEFF 		bl	WGreen_Write
+ 1770 0d2a 0020     		mov	r0, #0
+ 1771 0d2c FFF7FEFF 		bl	WYellow_Write
+ 1772 0d30 0020     		mov	r0, #0
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 39
+
+
+ 1773 0d32 FFF7FEFF 		bl	WRed_Write
+ 389:.\main.c      ****             EGreen_Write(0), EYellow_Write(0), ERed_Write(1);
+ 1774              		.loc 1 389 0
+ 1775 0d36 0020     		mov	r0, #0
+ 1776 0d38 FFF7FEFF 		bl	EGreen_Write
+ 1777 0d3c 0020     		mov	r0, #0
+ 1778 0d3e FFF7FEFF 		bl	EYellow_Write
+ 1779 0d42 0120     		mov	r0, #1
+ 1780 0d44 FFF7FEFF 		bl	ERed_Write
+ 390:.\main.c      ****             NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 1781              		.loc 1 390 0
+ 1782 0d48 0020     		mov	r0, #0
+ 1783 0d4a FFF7FEFF 		bl	NAGreen_Write
+ 1784 0d4e 0020     		mov	r0, #0
+ 1785 0d50 FFF7FEFF 		bl	NAYellow_Write
+ 1786 0d54 0120     		mov	r0, #1
+ 1787 0d56 FFF7FEFF 		bl	NARed_Write
+ 391:.\main.c      ****             SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 1788              		.loc 1 391 0
+ 1789 0d5a 0020     		mov	r0, #0
+ 1790 0d5c FFF7FEFF 		bl	SAGreen_Write
+ 1791 0d60 0020     		mov	r0, #0
+ 1792 0d62 FFF7FEFF 		bl	SAYellow_Write
+ 1793 0d66 0120     		mov	r0, #1
+ 1794 0d68 FFF7FEFF 		bl	SARed_Write
+ 392:.\main.c      ****             if((TLCMode_Read())||(TLCMode1_Read())||(!TLCMode2_Read())){
+ 1795              		.loc 1 392 0
+ 1796 0d6c FFF7FEFF 		bl	TLCMode_Read
+ 1797 0d70 031C     		mov	r3, r0
+ 1798 0d72 002B     		cmp	r3, #0
+ 1799 0d74 09D1     		bne	.L77
+ 1800              		.loc 1 392 0 is_stmt 0 discriminator 1
+ 1801 0d76 FFF7FEFF 		bl	TLCMode1_Read
+ 1802 0d7a 031C     		mov	r3, r0
+ 1803 0d7c 002B     		cmp	r3, #0
+ 1804 0d7e 04D1     		bne	.L77
+ 1805 0d80 FFF7FEFF 		bl	TLCMode2_Read
+ 1806 0d84 031C     		mov	r3, r0
+ 1807 0d86 002B     		cmp	r3, #0
+ 1808 0d88 13D1     		bne	.L76
+ 1809              	.L77:
+ 393:.\main.c      ****                 WGreen_Write(0), WYellow_Write(1);
+ 1810              		.loc 1 393 0 is_stmt 1
+ 1811 0d8a 0020     		mov	r0, #0
+ 1812 0d8c FFF7FEFF 		bl	WGreen_Write
+ 1813 0d90 0120     		mov	r0, #1
+ 1814 0d92 FFF7FEFF 		bl	WYellow_Write
+ 394:.\main.c      ****                 CyDelay(2500);
+ 1815              		.loc 1 394 0
+ 1816 0d96 4C4B     		ldr	r3, .L92
+ 1817 0d98 181C     		mov	r0, r3
+ 1818 0d9a FFF7FEFF 		bl	CyDelay
+ 395:.\main.c      ****                 WYellow_Write(0), WRed_Write(1);
+ 1819              		.loc 1 395 0
+ 1820 0d9e 0020     		mov	r0, #0
+ 1821 0da0 FFF7FEFF 		bl	WYellow_Write
+ 1822 0da4 0120     		mov	r0, #1
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 40
+
+
+ 1823 0da6 FFF7FEFF 		bl	WRed_Write
+ 396:.\main.c      ****                 CyDelay(2500);
+ 1824              		.loc 1 396 0
+ 1825 0daa 474B     		ldr	r3, .L92
+ 1826 0dac 181C     		mov	r0, r3
+ 1827 0dae FFF7FEFF 		bl	CyDelay
+ 1828              	.L76:
+ 385:.\main.c      ****         while((!TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1829              		.loc 1 385 0 discriminator 1
+ 1830 0db2 FFF7FEFF 		bl	TLCMode_Read
+ 1831 0db6 031C     		mov	r3, r0
+ 1832 0db8 002B     		cmp	r3, #0
+ 1833 0dba 09D1     		bne	.L75
+ 385:.\main.c      ****         while((!TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1834              		.loc 1 385 0 is_stmt 0 discriminator 2
+ 1835 0dbc FFF7FEFF 		bl	TLCMode1_Read
+ 1836 0dc0 031C     		mov	r3, r0
+ 1837 0dc2 002B     		cmp	r3, #0
+ 1838 0dc4 04D1     		bne	.L75
+ 385:.\main.c      ****         while((!TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1839              		.loc 1 385 0 discriminator 1
+ 1840 0dc6 FFF7FEFF 		bl	TLCMode2_Read
+ 1841 0dca 031C     		mov	r3, r0
+ 1842 0dcc 002B     		cmp	r3, #0
+ 1843 0dce 97D1     		bne	.L78
+ 1844              	.L75:
+ 397:.\main.c      ****             }}
+ 398:.\main.c      ****     }if ((TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){         //EMERGENCY EAST
+ 1845              		.loc 1 398 0 is_stmt 1
+ 1846 0dd0 FFF7FEFF 		bl	TLCMode_Read
+ 1847 0dd4 031C     		mov	r3, r0
+ 1848 0dd6 002B     		cmp	r3, #0
+ 1849 0dd8 00D1     		bne	.LCB1508
+ 1850 0dda 72E0     		b	.L79	@long jump
+ 1851              	.LCB1508:
+ 1852              		.loc 1 398 0 is_stmt 0 discriminator 1
+ 1853 0ddc FFF7FEFF 		bl	TLCMode1_Read
+ 1854 0de0 031C     		mov	r3, r0
+ 1855 0de2 002B     		cmp	r3, #0
+ 1856 0de4 6DD1     		bne	.L79
+ 1857 0de6 FFF7FEFF 		bl	TLCMode2_Read
+ 1858 0dea 031C     		mov	r3, r0
+ 1859 0dec 002B     		cmp	r3, #0
+ 1860 0dee 68D0     		beq	.L79
+ 399:.\main.c      ****         while((TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1861              		.loc 1 399 0 is_stmt 1
+ 1862 0df0 58E0     		b	.L80
+ 1863              	.L82:
+ 400:.\main.c      ****             NGreen_Write(0), NYellow_Write(0), NRed_Write(1);
+ 1864              		.loc 1 400 0
+ 1865 0df2 0020     		mov	r0, #0
+ 1866 0df4 FFF7FEFF 		bl	NGreen_Write
+ 1867 0df8 0020     		mov	r0, #0
+ 1868 0dfa FFF7FEFF 		bl	NYellow_Write
+ 1869 0dfe 0120     		mov	r0, #1
+ 1870 0e00 FFF7FEFF 		bl	NRed_Write
+ 401:.\main.c      ****             SGreen_Write(0), SYellow_Write(0), SRed_Write(1);
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 41
+
+
+ 1871              		.loc 1 401 0
+ 1872 0e04 0020     		mov	r0, #0
+ 1873 0e06 FFF7FEFF 		bl	SGreen_Write
+ 1874 0e0a 0020     		mov	r0, #0
+ 1875 0e0c FFF7FEFF 		bl	SYellow_Write
+ 1876 0e10 0120     		mov	r0, #1
+ 1877 0e12 FFF7FEFF 		bl	SRed_Write
+ 402:.\main.c      ****             WGreen_Write(0), WYellow_Write(0), WRed_Write(1);
+ 1878              		.loc 1 402 0
+ 1879 0e16 0020     		mov	r0, #0
+ 1880 0e18 FFF7FEFF 		bl	WGreen_Write
+ 1881 0e1c 0020     		mov	r0, #0
+ 1882 0e1e FFF7FEFF 		bl	WYellow_Write
+ 1883 0e22 0120     		mov	r0, #1
+ 1884 0e24 FFF7FEFF 		bl	WRed_Write
+ 403:.\main.c      ****             EGreen_Write(1), EYellow_Write(0), ERed_Write(0);
+ 1885              		.loc 1 403 0
+ 1886 0e28 0120     		mov	r0, #1
+ 1887 0e2a FFF7FEFF 		bl	EGreen_Write
+ 1888 0e2e 0020     		mov	r0, #0
+ 1889 0e30 FFF7FEFF 		bl	EYellow_Write
+ 1890 0e34 0020     		mov	r0, #0
+ 1891 0e36 FFF7FEFF 		bl	ERed_Write
+ 404:.\main.c      ****             NAGreen_Write(0), NAYellow_Write(0), NARed_Write(1);
+ 1892              		.loc 1 404 0
+ 1893 0e3a 0020     		mov	r0, #0
+ 1894 0e3c FFF7FEFF 		bl	NAGreen_Write
+ 1895 0e40 0020     		mov	r0, #0
+ 1896 0e42 FFF7FEFF 		bl	NAYellow_Write
+ 1897 0e46 0120     		mov	r0, #1
+ 1898 0e48 FFF7FEFF 		bl	NARed_Write
+ 405:.\main.c      ****             SAGreen_Write(0), SAYellow_Write(0), SARed_Write(1);
+ 1899              		.loc 1 405 0
+ 1900 0e4c 0020     		mov	r0, #0
+ 1901 0e4e FFF7FEFF 		bl	SAGreen_Write
+ 1902 0e52 0020     		mov	r0, #0
+ 1903 0e54 FFF7FEFF 		bl	SAYellow_Write
+ 1904 0e58 0120     		mov	r0, #1
+ 1905 0e5a FFF7FEFF 		bl	SARed_Write
+ 406:.\main.c      ****             if((!TLCMode_Read())||(TLCMode1_Read())||(!TLCMode2_Read())){
+ 1906              		.loc 1 406 0
+ 1907 0e5e FFF7FEFF 		bl	TLCMode_Read
+ 1908 0e62 031C     		mov	r3, r0
+ 1909 0e64 002B     		cmp	r3, #0
+ 1910 0e66 09D0     		beq	.L81
+ 1911              		.loc 1 406 0 is_stmt 0 discriminator 1
+ 1912 0e68 FFF7FEFF 		bl	TLCMode1_Read
+ 1913 0e6c 031C     		mov	r3, r0
+ 1914 0e6e 002B     		cmp	r3, #0
+ 1915 0e70 04D1     		bne	.L81
+ 1916 0e72 FFF7FEFF 		bl	TLCMode2_Read
+ 1917 0e76 031C     		mov	r3, r0
+ 1918 0e78 002B     		cmp	r3, #0
+ 1919 0e7a 13D1     		bne	.L80
+ 1920              	.L81:
+ 407:.\main.c      ****                 EGreen_Write(0), EYellow_Write(1);
+ 1921              		.loc 1 407 0 is_stmt 1
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 42
+
+
+ 1922 0e7c 0020     		mov	r0, #0
+ 1923 0e7e FFF7FEFF 		bl	EGreen_Write
+ 1924 0e82 0120     		mov	r0, #1
+ 1925 0e84 FFF7FEFF 		bl	EYellow_Write
+ 408:.\main.c      ****                 CyDelay(2500);
+ 1926              		.loc 1 408 0
+ 1927 0e88 0F4B     		ldr	r3, .L92
+ 1928 0e8a 181C     		mov	r0, r3
+ 1929 0e8c FFF7FEFF 		bl	CyDelay
+ 409:.\main.c      ****                 EYellow_Write(0), ERed_Write(1);
+ 1930              		.loc 1 409 0
+ 1931 0e90 0020     		mov	r0, #0
+ 1932 0e92 FFF7FEFF 		bl	EYellow_Write
+ 1933 0e96 0120     		mov	r0, #1
+ 1934 0e98 FFF7FEFF 		bl	ERed_Write
+ 410:.\main.c      ****                 CyDelay(2500);
+ 1935              		.loc 1 410 0
+ 1936 0e9c 0A4B     		ldr	r3, .L92
+ 1937 0e9e 181C     		mov	r0, r3
+ 1938 0ea0 FFF7FEFF 		bl	CyDelay
+ 1939              	.L80:
+ 399:.\main.c      ****         while((TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1940              		.loc 1 399 0 discriminator 1
+ 1941 0ea4 FFF7FEFF 		bl	TLCMode_Read
+ 1942 0ea8 031C     		mov	r3, r0
+ 1943 0eaa 002B     		cmp	r3, #0
+ 1944 0eac 09D0     		beq	.L79
+ 399:.\main.c      ****         while((TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1945              		.loc 1 399 0 is_stmt 0 discriminator 2
+ 1946 0eae FFF7FEFF 		bl	TLCMode1_Read
+ 1947 0eb2 031C     		mov	r3, r0
+ 1948 0eb4 002B     		cmp	r3, #0
+ 1949 0eb6 04D1     		bne	.L79
+ 399:.\main.c      ****         while((TLCMode_Read())&&(!TLCMode1_Read())&&(TLCMode2_Read())){
+ 1950              		.loc 1 399 0 discriminator 1
+ 1951 0eb8 FFF7FEFF 		bl	TLCMode2_Read
+ 1952 0ebc 031C     		mov	r3, r0
+ 1953 0ebe 002B     		cmp	r3, #0
+ 1954 0ec0 97D1     		bne	.L82
+ 1955              	.L79:
+ 411:.\main.c      ****             }}
+ 412:.\main.c      ****     }else{}
+ 413:.\main.c      ****     
+ 414:.\main.c      ****     }}
+ 1956              		.loc 1 414 0 is_stmt 1
+ 1957 0ec2 FFF7A5F8 		bl	.L83	@ far jump
+ 1958              	.L93:
+ 1959 0ec6 C046     		.align	2
+ 1960              	.L92:
+ 1961 0ec8 C4090000 		.word	2500
+ 1962              		.cfi_endproc
+ 1963              	.LFE35:
+ 1964              		.size	main, .-main
+ 1965              		.text
+ 1966              	.Letext0:
+ 1967              		.section	.debug_info,"",%progbits
+ 1968              	.Ldebug_info0:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 43
+
+
+ 1969 0000 11010000 		.4byte	0x111
+ 1970 0004 0400     		.2byte	0x4
+ 1971 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1972 000a 04       		.byte	0x4
+ 1973 000b 01       		.uleb128 0x1
+ 1974 000c 3C000000 		.4byte	.LASF28
+ 1975 0010 01       		.byte	0x1
+ 1976 0011 35010000 		.4byte	.LASF29
+ 1977 0015 F9000000 		.4byte	.LASF30
+ 1978 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1979 001d 00000000 		.4byte	0
+ 1980 0021 00000000 		.4byte	.Ldebug_line0
+ 1981 0025 02       		.uleb128 0x2
+ 1982 0026 01       		.byte	0x1
+ 1983 0027 06       		.byte	0x6
+ 1984 0028 D2010000 		.4byte	.LASF0
+ 1985 002c 02       		.uleb128 0x2
+ 1986 002d 01       		.byte	0x1
+ 1987 002e 08       		.byte	0x8
+ 1988 002f B8000000 		.4byte	.LASF1
+ 1989 0033 02       		.uleb128 0x2
+ 1990 0034 02       		.byte	0x2
+ 1991 0035 05       		.byte	0x5
+ 1992 0036 BA010000 		.4byte	.LASF2
+ 1993 003a 02       		.uleb128 0x2
+ 1994 003b 02       		.byte	0x2
+ 1995 003c 07       		.byte	0x7
+ 1996 003d 1C000000 		.4byte	.LASF3
+ 1997 0041 02       		.uleb128 0x2
+ 1998 0042 04       		.byte	0x4
+ 1999 0043 05       		.byte	0x5
+ 2000 0044 C4010000 		.4byte	.LASF4
+ 2001 0048 02       		.uleb128 0x2
+ 2002 0049 04       		.byte	0x4
+ 2003 004a 07       		.byte	0x7
+ 2004 004b D0000000 		.4byte	.LASF5
+ 2005 004f 02       		.uleb128 0x2
+ 2006 0050 08       		.byte	0x8
+ 2007 0051 05       		.byte	0x5
+ 2008 0052 82010000 		.4byte	.LASF6
+ 2009 0056 02       		.uleb128 0x2
+ 2010 0057 08       		.byte	0x8
+ 2011 0058 07       		.byte	0x7
+ 2012 0059 57010000 		.4byte	.LASF7
+ 2013 005d 03       		.uleb128 0x3
+ 2014 005e 04       		.byte	0x4
+ 2015 005f 05       		.byte	0x5
+ 2016 0060 696E7400 		.ascii	"int\000"
+ 2017 0064 02       		.uleb128 0x2
+ 2018 0065 04       		.byte	0x4
+ 2019 0066 07       		.byte	0x7
+ 2020 0067 4A010000 		.4byte	.LASF8
+ 2021 006b 02       		.uleb128 0x2
+ 2022 006c 04       		.byte	0x4
+ 2023 006d 04       		.byte	0x4
+ 2024 006e 36000000 		.4byte	.LASF9
+ 2025 0072 02       		.uleb128 0x2
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 44
+
+
+ 2026 0073 08       		.byte	0x8
+ 2027 0074 04       		.byte	0x4
+ 2028 0075 F2000000 		.4byte	.LASF10
+ 2029 0079 02       		.uleb128 0x2
+ 2030 007a 01       		.byte	0x1
+ 2031 007b 08       		.byte	0x8
+ 2032 007c CD010000 		.4byte	.LASF11
+ 2033 0080 02       		.uleb128 0x2
+ 2034 0081 04       		.byte	0x4
+ 2035 0082 07       		.byte	0x7
+ 2036 0083 79010000 		.4byte	.LASF12
+ 2037 0087 04       		.uleb128 0x4
+ 2038 0088 3E010000 		.4byte	.LASF31
+ 2039 008c 01       		.byte	0x1
+ 2040 008d 04       		.byte	0x4
+ 2041 008e 5D000000 		.4byte	0x5d
+ 2042 0092 00000000 		.4byte	.LFB35
+ 2043 0096 CC0E0000 		.4byte	.LFE35-.LFB35
+ 2044 009a 01       		.uleb128 0x1
+ 2045 009b 9C       		.byte	0x9c
+ 2046 009c 05       		.uleb128 0x5
+ 2047 009d 08000000 		.4byte	.LASF32
+ 2048 00a1 01       		.byte	0x1
+ 2049 00a2 01       		.byte	0x1
+ 2050 00a3 06       		.byte	0x6
+ 2051 00a4 F7000000 		.4byte	0xf7
+ 2052 00a8 06       		.uleb128 0x6
+ 2053 00a9 00000000 		.4byte	.LASF13
+ 2054 00ad 00       		.sleb128 0
+ 2055 00ae 06       		.uleb128 0x6
+ 2056 00af A9010000 		.4byte	.LASF14
+ 2057 00b3 01       		.sleb128 1
+ 2058 00b4 06       		.uleb128 0x6
+ 2059 00b5 43010000 		.4byte	.LASF15
+ 2060 00b9 02       		.sleb128 2
+ 2061 00ba 06       		.uleb128 0x6
+ 2062 00bb E2000000 		.4byte	.LASF16
+ 2063 00bf 03       		.sleb128 3
+ 2064 00c0 06       		.uleb128 0x6
+ 2065 00c1 B2010000 		.4byte	.LASF17
+ 2066 00c5 04       		.sleb128 4
+ 2067 00c6 06       		.uleb128 0x6
+ 2068 00c7 A2010000 		.4byte	.LASF18
+ 2069 00cb 05       		.sleb128 5
+ 2070 00cc 06       		.uleb128 0x6
+ 2071 00cd DE010000 		.4byte	.LASF19
+ 2072 00d1 06       		.sleb128 6
+ 2073 00d2 06       		.uleb128 0x6
+ 2074 00d3 C6000000 		.4byte	.LASF20
+ 2075 00d7 07       		.sleb128 7
+ 2076 00d8 06       		.uleb128 0x6
+ 2077 00d9 6E010000 		.4byte	.LASF21
+ 2078 00dd 08       		.sleb128 8
+ 2079 00de 06       		.uleb128 0x6
+ 2080 00df 90010000 		.4byte	.LASF22
+ 2081 00e3 09       		.sleb128 9
+ 2082 00e4 06       		.uleb128 0x6
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 45
+
+
+ 2083 00e5 E9000000 		.4byte	.LASF23
+ 2084 00e9 0A       		.sleb128 10
+ 2085 00ea 06       		.uleb128 0x6
+ 2086 00eb 98010000 		.4byte	.LASF24
+ 2087 00ef 0B       		.sleb128 11
+ 2088 00f0 06       		.uleb128 0x6
+ 2089 00f1 15000000 		.4byte	.LASF25
+ 2090 00f5 0C       		.sleb128 12
+ 2091 00f6 00       		.byte	0
+ 2092 00f7 07       		.uleb128 0x7
+ 2093 00f8 2F000000 		.4byte	.LASF26
+ 2094 00fc 01       		.byte	0x1
+ 2095 00fd 17       		.byte	0x17
+ 2096 00fe 5D000000 		.4byte	0x5d
+ 2097 0102 02       		.uleb128 0x2
+ 2098 0103 91       		.byte	0x91
+ 2099 0104 74       		.sleb128 -12
+ 2100 0105 07       		.uleb128 0x7
+ 2101 0106 0F000000 		.4byte	.LASF27
+ 2102 010a 01       		.byte	0x1
+ 2103 010b 19       		.byte	0x19
+ 2104 010c 9C000000 		.4byte	0x9c
+ 2105 0110 02       		.uleb128 0x2
+ 2106 0111 91       		.byte	0x91
+ 2107 0112 73       		.sleb128 -13
+ 2108 0113 00       		.byte	0
+ 2109 0114 00       		.byte	0
+ 2110              		.section	.debug_abbrev,"",%progbits
+ 2111              	.Ldebug_abbrev0:
+ 2112 0000 01       		.uleb128 0x1
+ 2113 0001 11       		.uleb128 0x11
+ 2114 0002 01       		.byte	0x1
+ 2115 0003 25       		.uleb128 0x25
+ 2116 0004 0E       		.uleb128 0xe
+ 2117 0005 13       		.uleb128 0x13
+ 2118 0006 0B       		.uleb128 0xb
+ 2119 0007 03       		.uleb128 0x3
+ 2120 0008 0E       		.uleb128 0xe
+ 2121 0009 1B       		.uleb128 0x1b
+ 2122 000a 0E       		.uleb128 0xe
+ 2123 000b 55       		.uleb128 0x55
+ 2124 000c 17       		.uleb128 0x17
+ 2125 000d 11       		.uleb128 0x11
+ 2126 000e 01       		.uleb128 0x1
+ 2127 000f 10       		.uleb128 0x10
+ 2128 0010 17       		.uleb128 0x17
+ 2129 0011 00       		.byte	0
+ 2130 0012 00       		.byte	0
+ 2131 0013 02       		.uleb128 0x2
+ 2132 0014 24       		.uleb128 0x24
+ 2133 0015 00       		.byte	0
+ 2134 0016 0B       		.uleb128 0xb
+ 2135 0017 0B       		.uleb128 0xb
+ 2136 0018 3E       		.uleb128 0x3e
+ 2137 0019 0B       		.uleb128 0xb
+ 2138 001a 03       		.uleb128 0x3
+ 2139 001b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 46
+
+
+ 2140 001c 00       		.byte	0
+ 2141 001d 00       		.byte	0
+ 2142 001e 03       		.uleb128 0x3
+ 2143 001f 24       		.uleb128 0x24
+ 2144 0020 00       		.byte	0
+ 2145 0021 0B       		.uleb128 0xb
+ 2146 0022 0B       		.uleb128 0xb
+ 2147 0023 3E       		.uleb128 0x3e
+ 2148 0024 0B       		.uleb128 0xb
+ 2149 0025 03       		.uleb128 0x3
+ 2150 0026 08       		.uleb128 0x8
+ 2151 0027 00       		.byte	0
+ 2152 0028 00       		.byte	0
+ 2153 0029 04       		.uleb128 0x4
+ 2154 002a 2E       		.uleb128 0x2e
+ 2155 002b 01       		.byte	0x1
+ 2156 002c 3F       		.uleb128 0x3f
+ 2157 002d 19       		.uleb128 0x19
+ 2158 002e 03       		.uleb128 0x3
+ 2159 002f 0E       		.uleb128 0xe
+ 2160 0030 3A       		.uleb128 0x3a
+ 2161 0031 0B       		.uleb128 0xb
+ 2162 0032 3B       		.uleb128 0x3b
+ 2163 0033 0B       		.uleb128 0xb
+ 2164 0034 49       		.uleb128 0x49
+ 2165 0035 13       		.uleb128 0x13
+ 2166 0036 11       		.uleb128 0x11
+ 2167 0037 01       		.uleb128 0x1
+ 2168 0038 12       		.uleb128 0x12
+ 2169 0039 06       		.uleb128 0x6
+ 2170 003a 40       		.uleb128 0x40
+ 2171 003b 18       		.uleb128 0x18
+ 2172 003c 9642     		.uleb128 0x2116
+ 2173 003e 19       		.uleb128 0x19
+ 2174 003f 00       		.byte	0
+ 2175 0040 00       		.byte	0
+ 2176 0041 05       		.uleb128 0x5
+ 2177 0042 04       		.uleb128 0x4
+ 2178 0043 01       		.byte	0x1
+ 2179 0044 03       		.uleb128 0x3
+ 2180 0045 0E       		.uleb128 0xe
+ 2181 0046 0B       		.uleb128 0xb
+ 2182 0047 0B       		.uleb128 0xb
+ 2183 0048 3A       		.uleb128 0x3a
+ 2184 0049 0B       		.uleb128 0xb
+ 2185 004a 3B       		.uleb128 0x3b
+ 2186 004b 0B       		.uleb128 0xb
+ 2187 004c 01       		.uleb128 0x1
+ 2188 004d 13       		.uleb128 0x13
+ 2189 004e 00       		.byte	0
+ 2190 004f 00       		.byte	0
+ 2191 0050 06       		.uleb128 0x6
+ 2192 0051 28       		.uleb128 0x28
+ 2193 0052 00       		.byte	0
+ 2194 0053 03       		.uleb128 0x3
+ 2195 0054 0E       		.uleb128 0xe
+ 2196 0055 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 47
+
+
+ 2197 0056 0D       		.uleb128 0xd
+ 2198 0057 00       		.byte	0
+ 2199 0058 00       		.byte	0
+ 2200 0059 07       		.uleb128 0x7
+ 2201 005a 34       		.uleb128 0x34
+ 2202 005b 00       		.byte	0
+ 2203 005c 03       		.uleb128 0x3
+ 2204 005d 0E       		.uleb128 0xe
+ 2205 005e 3A       		.uleb128 0x3a
+ 2206 005f 0B       		.uleb128 0xb
+ 2207 0060 3B       		.uleb128 0x3b
+ 2208 0061 0B       		.uleb128 0xb
+ 2209 0062 49       		.uleb128 0x49
+ 2210 0063 13       		.uleb128 0x13
+ 2211 0064 02       		.uleb128 0x2
+ 2212 0065 18       		.uleb128 0x18
+ 2213 0066 00       		.byte	0
+ 2214 0067 00       		.byte	0
+ 2215 0068 00       		.byte	0
+ 2216              		.section	.debug_aranges,"",%progbits
+ 2217 0000 1C000000 		.4byte	0x1c
+ 2218 0004 0200     		.2byte	0x2
+ 2219 0006 00000000 		.4byte	.Ldebug_info0
+ 2220 000a 04       		.byte	0x4
+ 2221 000b 00       		.byte	0
+ 2222 000c 0000     		.2byte	0
+ 2223 000e 0000     		.2byte	0
+ 2224 0010 00000000 		.4byte	.LFB35
+ 2225 0014 CC0E0000 		.4byte	.LFE35-.LFB35
+ 2226 0018 00000000 		.4byte	0
+ 2227 001c 00000000 		.4byte	0
+ 2228              		.section	.debug_ranges,"",%progbits
+ 2229              	.Ldebug_ranges0:
+ 2230 0000 00000000 		.4byte	.LFB35
+ 2231 0004 CC0E0000 		.4byte	.LFE35
+ 2232 0008 00000000 		.4byte	0
+ 2233 000c 00000000 		.4byte	0
+ 2234              		.section	.debug_line,"",%progbits
+ 2235              	.Ldebug_line0:
+ 2236 0000 BA020000 		.section	.debug_str,"MS",%progbits,1
+ 2236      02001F00 
+ 2236      00000201 
+ 2236      FB0E0D00 
+ 2236      01010101 
+ 2237              	.LASF13:
+ 2238 0000 4E534772 		.ascii	"NSGreen\000"
+ 2238      65656E00 
+ 2239              	.LASF32:
+ 2240 0008 73746174 		.ascii	"states\000"
+ 2240      657300
+ 2241              	.LASF27:
+ 2242 000f 73746174 		.ascii	"state\000"
+ 2242      6500
+ 2243              	.LASF25:
+ 2244 0015 53477265 		.ascii	"SGreen\000"
+ 2244      656E00
+ 2245              	.LASF3:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 48
+
+
+ 2246 001c 73686F72 		.ascii	"short unsigned int\000"
+ 2246      7420756E 
+ 2246      7369676E 
+ 2246      65642069 
+ 2246      6E7400
+ 2247              	.LASF26:
+ 2248 002f 73746174 		.ascii	"state2\000"
+ 2248      653200
+ 2249              	.LASF9:
+ 2250 0036 666C6F61 		.ascii	"float\000"
+ 2250      7400
+ 2251              	.LASF28:
+ 2252 003c 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
+ 2252      4320342E 
+ 2252      382E3420 
+ 2252      32303134 
+ 2252      30353236 
+ 2253 006f 616E6368 		.ascii	"anch revision 211358] -mcpu=cortex-m0 -mthumb -g -O"
+ 2253      20726576 
+ 2253      6973696F 
+ 2253      6E203231 
+ 2253      31333538 
+ 2254 00a2 30202D66 		.ascii	"0 -ffunction-sections\000"
+ 2254      66756E63 
+ 2254      74696F6E 
+ 2254      2D736563 
+ 2254      74696F6E 
+ 2255              	.LASF1:
+ 2256 00b8 756E7369 		.ascii	"unsigned char\000"
+ 2256      676E6564 
+ 2256      20636861 
+ 2256      7200
+ 2257              	.LASF20:
+ 2258 00c6 4E415341 		.ascii	"NASAGreen\000"
+ 2258      47726565 
+ 2258      6E00
+ 2259              	.LASF5:
+ 2260 00d0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2260      20756E73 
+ 2260      69676E65 
+ 2260      6420696E 
+ 2260      7400
+ 2261              	.LASF16:
+ 2262 00e2 57477265 		.ascii	"WGreen\000"
+ 2262      656E00
+ 2263              	.LASF23:
+ 2264 00e9 53534147 		.ascii	"SSAGreen\000"
+ 2264      7265656E 
+ 2264      00
+ 2265              	.LASF10:
+ 2266 00f2 646F7562 		.ascii	"double\000"
+ 2266      6C6500
+ 2267              	.LASF30:
+ 2268 00f9 433A5C55 		.ascii	"C:\\Users\\Pavandeep\\Documents\\PSoC Creator\\TLC "
+ 2268      73657273 
+ 2268      5C506176 
+ 2268      616E6465 
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 49
+
+
+ 2268      65705C44 
+ 2269 0127 325C544C 		.ascii	"2\\TLC 2.cydsn\000"
+ 2269      4320322E 
+ 2269      63796473 
+ 2269      6E00
+ 2270              	.LASF29:
+ 2271 0135 2E5C6D61 		.ascii	".\\main.c\000"
+ 2271      696E2E63 
+ 2271      00
+ 2272              	.LASF31:
+ 2273 013e 6D61696E 		.ascii	"main\000"
+ 2273      00
+ 2274              	.LASF15:
+ 2275 0143 416C6C52 		.ascii	"AllRed\000"
+ 2275      656400
+ 2276              	.LASF8:
+ 2277 014a 756E7369 		.ascii	"unsigned int\000"
+ 2277      676E6564 
+ 2277      20696E74 
+ 2277      00
+ 2278              	.LASF7:
+ 2279 0157 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2279      206C6F6E 
+ 2279      6720756E 
+ 2279      7369676E 
+ 2279      65642069 
+ 2280              	.LASF21:
+ 2281 016e 4E415341 		.ascii	"NASAYellow\000"
+ 2281      59656C6C 
+ 2281      6F7700
+ 2282              	.LASF12:
+ 2283 0179 73697A65 		.ascii	"sizetype\000"
+ 2283      74797065 
+ 2283      00
+ 2284              	.LASF6:
+ 2285 0182 6C6F6E67 		.ascii	"long long int\000"
+ 2285      206C6F6E 
+ 2285      6720696E 
+ 2285      7400
+ 2286              	.LASF22:
+ 2287 0190 53414772 		.ascii	"SAGreen\000"
+ 2287      65656E00 
+ 2288              	.LASF24:
+ 2289 0198 53534159 		.ascii	"SSAYellow\000"
+ 2289      656C6C6F 
+ 2289      7700
+ 2290              	.LASF18:
+ 2291 01a2 45477265 		.ascii	"EGreen\000"
+ 2291      656E00
+ 2292              	.LASF14:
+ 2293 01a9 4E535965 		.ascii	"NSYellow\000"
+ 2293      6C6C6F77 
+ 2293      00
+ 2294              	.LASF17:
+ 2295 01b2 5759656C 		.ascii	"WYellow\000"
+ 2295      6C6F7700 
+ 2296              	.LASF2:
+ARM GAS  C:\Users\PAVAND~1\AppData\Local\Temp\ccAii0NO.s 			page 50
+
+
+ 2297 01ba 73686F72 		.ascii	"short int\000"
+ 2297      7420696E 
+ 2297      7400
+ 2298              	.LASF4:
+ 2299 01c4 6C6F6E67 		.ascii	"long int\000"
+ 2299      20696E74 
+ 2299      00
+ 2300              	.LASF11:
+ 2301 01cd 63686172 		.ascii	"char\000"
+ 2301      00
+ 2302              	.LASF0:
+ 2303 01d2 7369676E 		.ascii	"signed char\000"
+ 2303      65642063 
+ 2303      68617200 
+ 2304              	.LASF19:
+ 2305 01de 4559656C 		.ascii	"EYellow\000"
+ 2305      6C6F7700 
+ 2306              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br

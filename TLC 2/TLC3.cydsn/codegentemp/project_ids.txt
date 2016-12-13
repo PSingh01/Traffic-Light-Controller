@@ -1,0 +1,6 @@
+C:\Users\Pavandeep\Documents\PSoC Creator\TLC 2\TLC 2.cydsn\TLC 2.cyprj|56d991aa-69cb-45af-9ce2-4b9d76489633
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|007c05da-5439-4c28-948e-94b82ac9a387
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|9f7f8a6a-cf74-4334-a3a9-fb965a52cd9c
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c46a9c70-41e2-4a59-99fc-54a863bb94c9
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3d3b7d63-d88d-44dd-9c07-4714e1005717
+C:\Users\Pavandeep\Documents\PSoC Creator\TLC 2\TLC3.cydsn\TLC3.cyprj|e811106b-aaaa-4896-afd5-dbab54b7f5ac
